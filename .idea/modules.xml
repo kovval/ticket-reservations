@@ -3,8 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ticket-reservations.iml" filepath="$PROJECT_DIR$/ticket-reservations.iml" />
-      <module fileurl="file://C:\Users\admin\Desktop\Projekt\ticket-reservations\ticket-reservations.iml" filepath="C:\Users\admin\Desktop\Projekt\ticket-reservations\ticket-reservations.iml" />
-      <module fileurl="file://C:\Users\admin\Desktop\Projekt\ticket-reservations\.idea\ticket-reservations.iml" filepath="C:\Users\admin\Desktop\Projekt\ticket-reservations\.idea\ticket-reservations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ticket-reservations.iml" filepath="$PROJECT_DIR$/ticket-reservations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../admin/Desktop/Projekt/ticket-reservations/ticket-reservations.iml" filepath="$PROJECT_DIR$/../../../../admin/Desktop/Projekt/ticket-reservations/ticket-reservations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../admin/Desktop/Projekt/ticket-reservations/.idea/ticket-reservations.iml" filepath="$PROJECT_DIR$/../../../../admin/Desktop/Projekt/ticket-reservations/.idea/ticket-reservations.iml" />
     </modules>
   </component>
 </project>
