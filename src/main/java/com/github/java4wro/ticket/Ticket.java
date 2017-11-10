@@ -10,7 +10,7 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public String id;
     @ManyToOne
-    public Long rov;
+    public Long row;
     public Long place;
 
     public String getId() {
@@ -21,12 +21,12 @@ public class Ticket {
         this.id = id;
     }
 
-    public Long getRov() {
-        return rov;
+    public Long getRow() {
+        return row;
     }
 
-    public void setRov(Long rov) {
-        this.rov = rov;
+    public void setRow(Long row) {
+        this.row = row;
     }
 
     public Long getPlace() {
