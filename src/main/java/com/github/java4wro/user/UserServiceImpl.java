@@ -1,8 +1,5 @@
-package com.github.java4wro.user.Service.impl;
+package com.github.java4wro.user;
 
-import com.github.java4wro.user.Service.UserService;
-import com.github.java4wro.user.UserMapper;
-import com.github.java4wro.user.UserRepository;
 import com.github.java4wro.user.dto.UserDTO;
 import com.github.java4wro.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;

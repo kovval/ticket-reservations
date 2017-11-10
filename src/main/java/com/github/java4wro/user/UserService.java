@@ -1,4 +1,4 @@
-package com.github.java4wro.user.Service;
+package com.github.java4wro.user;
 
 import com.github.java4wro.user.dto.UserDTO;
 
