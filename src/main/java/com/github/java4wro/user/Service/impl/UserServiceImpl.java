@@ -8,11 +8,10 @@ import com.github.java4wro.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by admin on 10.11.2017.
- */
+
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -26,5 +25,10 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException();
         }
         return userMapper.toUserDTO(user);
+    }
+    public UserDTO addUser (User newUser){
+        User user = new User();
+
+        return null;
     }
 }
