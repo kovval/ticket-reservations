@@ -4,9 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-/**
- * Created by admin on 10.11.2017.
- */
+
 @Data
 @Entity
 public class User {
