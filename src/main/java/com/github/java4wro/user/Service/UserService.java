@@ -7,5 +7,5 @@ import com.github.java4wro.user.dto.UserDTO;
  */
 public interface UserService {
 
-    UserDTO findUser(String userUuid);
+    UserDTO findUser(String userEmail);
 }

@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public UserDTO findUser(String userUuid) {
-        User user = userRepository.findOneByEmail(userUuid);
+    public UserDTO findUser(String userMail) {
+        User user = userRepository.findOneByEmail(userMail);
         if(user==null){
             throw new RuntimeException();
         }
