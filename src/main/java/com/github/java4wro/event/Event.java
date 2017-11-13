@@ -57,11 +57,11 @@ public class Event extends BaseEntity {
         this.description = description;
     }
 
-    public Integer getBasicPrice() {
+    public BigDecimal getBasicPrice() {
         return basicPrice;
     }
 
-    public void setBasicPrice(Integer basicPrice) {
+    public void setBasicPrice(BigDecimal basicPrice) {
         this.basicPrice = basicPrice;
     }
 

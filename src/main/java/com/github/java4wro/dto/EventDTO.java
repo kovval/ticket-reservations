@@ -15,11 +15,11 @@ public class EventDTO {
     private String eventDescription;
     private LocalDateTime eventDateTime;
 
-    public Integer getEventPrice() {
+    public BigDecimal getEventPrice() {
         return eventPrice;
     }
 
-    public void setEventPrice(Integer eventPrice) {
+    public void setEventPrice(BigDecimal eventPrice) {
         this.eventPrice = eventPrice;
     }
 
