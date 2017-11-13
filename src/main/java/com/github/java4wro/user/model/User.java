@@ -18,10 +18,12 @@ public class User extends BaseEntity {
     @Column(unique = true)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
     private UserRole role;
 
-    private boolean enabled;
+
+    private boolean enabled=false;
 
 }
