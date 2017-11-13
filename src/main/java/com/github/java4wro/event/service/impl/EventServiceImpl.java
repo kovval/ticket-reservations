@@ -21,12 +21,13 @@ public class EventServiceImpl implements EventService {
     public EventDTO addEvent(EventDTO eventDTO) {
 
         Event event = new Event();
+
         event.setBasicPrice(eventDTO.getEventPrice());
         event.setDateTime(eventDTO.getEventDateTime());
         event.setTitle(eventDTO.getEventName());
 
         event = eventRepository.save(event);
 
-        return null;
+        return eventMapper.toEventDTO;
     }
 }
