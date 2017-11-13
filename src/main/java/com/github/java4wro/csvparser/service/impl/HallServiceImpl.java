@@ -44,6 +44,10 @@ public class HallServiceImpl implements HallService {
                         sB.append(r);
                         sB.append(String.valueOf(i + 1));
                         hall_1.put(sB.toString(), Float.valueOf(singleRow[i]));
+                        Hall_1_seat newSeat = new Hall_1_seat();
+                        newSeat.setSeat(sB.toString());
+                        newSeat.setValue(Float.valueOf(singleRow[i]));
+                        hall_1Repository.save(newSeat);
                     }
                 }
                 row++;
