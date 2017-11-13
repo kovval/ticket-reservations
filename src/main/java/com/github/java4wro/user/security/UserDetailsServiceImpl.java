@@ -1,13 +1,15 @@
 package com.github.java4wro.user.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.github.java4wro.user.model.User;
 import com.github.java4wro.user.UserRepository;
-
+import com.github.java4wro.user.model.User;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+@Getter
+@Setter
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
