@@ -27,12 +27,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUSer(UserDTO userDTO) {
+    public UserDTO addUSer(UserDTO userDTO) {
         User user=new User();
         user.setPassword(userDTO.getPassword());
         user.setEmail(userDTO.getEmail());
 
-        userRepository.save(user);
+        return userMapper.toUserDTO(userRepository.save(user));
     }
 
     @Override
