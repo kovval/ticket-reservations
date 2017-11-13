@@ -9,10 +9,4 @@ import java.util.List;
  * Created by RENT on 2017-11-10.
  */
 public interface EventRepository extends JpaRepository<Event,Long> {
-//
-//    List<Event>listOfAllEvents();
-//
-////    Event eventsSortingByDate();
-//    Event eventsSortingByPrice();
-
 }
