@@ -23,7 +23,6 @@ public class User extends BaseEntity {
 
     private UserRole role;
 
-
-    private boolean enabled=false;
+    private boolean enabled;
 
 }

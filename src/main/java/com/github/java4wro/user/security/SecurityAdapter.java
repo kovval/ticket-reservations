@@ -22,6 +22,8 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/api/users").permitAll();
+//                .anyRequest().authenticated();
+
 
 
         http.formLogin()

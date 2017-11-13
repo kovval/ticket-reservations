@@ -20,7 +20,7 @@ public class UserController {
     }
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public UserDTO addUser (UserDTO userDto) {
-        return userService.addUSer(userDto);
+        return userService.addUser(userDto);
     }
 
     @GetMapping(value = "/confirmRegistration")
