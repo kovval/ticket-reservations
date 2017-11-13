@@ -2,6 +2,7 @@ package com.github.java4wro.event.service.impl;
 
 import com.github.java4wro.dto.EventDTO;
 import com.github.java4wro.event.Event;
+import com.github.java4wro.event.EventMapper;
 import com.github.java4wro.event.EventRepository;
 import com.github.java4wro.event.service.EventService;
 import lombok.Getter;
@@ -17,6 +18,9 @@ public class EventServiceImpl implements EventService {
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    private EventMapper eventMapper;
+
     @Override
     public EventDTO addEvent(EventDTO eventDTO) {
 
@@ -28,6 +32,6 @@ public class EventServiceImpl implements EventService {
 
         event = eventRepository.save(event);
 
-        return eventMapper.toEventDTO;
+        return eventMapper.toEventDTO(event);
     }
 }

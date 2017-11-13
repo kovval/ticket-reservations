@@ -4,12 +4,12 @@ import com.github.java4wro.commons.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.catalina.LifecycleState;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class Event extends BaseEntity {
 
     private String title;
     private String description ;
-    private Integer basicPrice;
+    private BigDecimal basicPrice;
     private LocalDateTime dateTime;
 
 
@@ -73,3 +73,4 @@ public class Event extends BaseEntity {
         this.dateTime = dateTime;
     }
 }
+
