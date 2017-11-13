@@ -11,4 +11,6 @@ public interface UserService {
     UserDTO addUSer(UserDTO userDTO);
 
     List<UserDTO> getAll();
+
+    void confirmRegistration(String token);
 }
