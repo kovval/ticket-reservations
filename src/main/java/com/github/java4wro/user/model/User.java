@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -24,5 +25,9 @@ public class User extends BaseEntity {
     private UserRole role;
 
     private boolean enabled;
+
+    public Date getExpiryDate (){
+        return null;
+    }
 
 }

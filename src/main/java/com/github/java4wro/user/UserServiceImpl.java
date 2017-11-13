@@ -9,7 +9,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 
@@ -64,8 +66,8 @@ public class UserServiceImpl implements UserService {
         User user=userRepository.findOneByUuid(token);
 
         if (user!=null){
-            Instant now = ZonedDateTime.now().minusDays(30).toInstant();
-            Instant expiryDate = user.getCreatedAt().toInstant();
+            Date now = new Date();
+            Date expiryDate = user.getCreatedAt();
             user.setEnabled(true);
         }
         userRepository.save(user);

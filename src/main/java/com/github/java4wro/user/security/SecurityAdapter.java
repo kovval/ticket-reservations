@@ -27,12 +27,12 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
 
 
         http.formLogin()
-                .loginPage("/api/users")
-                .usernameParameter("user")
+                .loginPage("/api/users/login")
+                .usernameParameter("email")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/hello.html")
                 .failureHandler((request, response, exception) -> response.sendError(HttpStatus.BAD_REQUEST.value(),
-                        "Username or password invalid"));
+                        "Email or password invalid"));
     }
 
     @Bean
