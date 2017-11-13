@@ -13,5 +13,20 @@ public class EventDTO {
     private String eventName;
     private LocalDateTime eventDateAndTime;
 
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public LocalDateTime getEventDateAndTime() {
+        return eventDateAndTime;
+    }
+
+    public void setEventDateAndTime(LocalDateTime eventDateAndTime) {
+        this.eventDateAndTime = eventDateAndTime;
+    }
 
 }
