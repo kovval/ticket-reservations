@@ -3,34 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Event</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
 <body>
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+<script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
 <form action="/add-event" method="post">
-    <input class="form-control" type="text" placeholder="cena" name="cena">
-    <input class="form-control" type="text" placeholder="nazwa" name="nazwa">
-    <input class="form-control" type="text" placeholder="opis" name="opis">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class='col-sm-6'>
-                <div class="form-group">
-                    <div class='input-group date' id='datetimepicker1'>
-                        <input type='text' class="form-control" />
-                        <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input class="form-control" type="text" placeholder="nazwa" name="eventName">
+                <input class="form-control" type="text" placeholder="opis" name="eventDescription">
+                <input class="form-control" type="text" placeholder="cena" name="eventPrice">
+                <form method="post">
+                    <!-- Date input -->
+                    <div class="form-group">
+                        <label class="control-label" for="date">Data</label>
+                        <input class="form-control" id="date" placeholder="MM/DD/YYY" type="text"
+                               name="eventDateTime"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="submit-btn">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <!-- Submit button -->
+                    <div class="form-group">
+                        <button class="btn btn-primary " name="submit" type="submit">Submit</button>
                     </div>
                 </div>
             </div>
-            <script type="text/javascript">
-                $(function () {
-                    $('#datetimepicker1').datetimepicker();
-                });
-            </script>
         </div>
-    <div><input type="submit" value="Sign In"/></div>
+    </div>
 </form>
-
-
-</div>
 </body>
 </html>
