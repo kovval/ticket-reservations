@@ -1,5 +1,6 @@
 package com.github.java4wro;
 
+import com.github.java4wro.ticket.Ticket;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -46,5 +47,7 @@ public class Application {
                 .licenseUrl("https://github.com/IBM-Bluemix/news-aggregator/blob/master/LICENSE")
                 .version("2.0")
                 .build();
+
     }
+
 }
