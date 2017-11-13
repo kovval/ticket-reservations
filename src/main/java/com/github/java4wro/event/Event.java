@@ -28,10 +28,10 @@ public class Event extends BaseEntity {
     private Long id;
 
     private String title;
-    private String director;
-    private String room;
+    private String description ;
     private Integer basicPrice;
     private LocalDateTime dateTime;
+
 
 
 
