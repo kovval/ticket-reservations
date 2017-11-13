@@ -6,9 +6,31 @@
 </head>
 <body>
 <form action="/add-event" method="post">
-    <div>User Name : <input type="text" name=""/></div>
-    <div>Password: <input type="text" name=""/></div>
+    <input class="form-control" type="text" placeholder="cena" name="cena">
+    <input class="form-control" type="text" placeholder="nazwa" name="nazwa">
+    <input class="form-control" type="text" placeholder="opis" name="opis">
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(function () {
+                    $('#datetimepicker1').datetimepicker();
+                });
+            </script>
+        </div>
     <div><input type="submit" value="Sign In"/></div>
 </form>
+
+
+</div>
 </body>
 </html>
