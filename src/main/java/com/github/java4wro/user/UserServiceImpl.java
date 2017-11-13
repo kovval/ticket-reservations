@@ -2,7 +2,10 @@ package com.github.java4wro.user;
 
 import com.github.java4wro.user.dto.UserDTO;
 import com.github.java4wro.user.model.User;
+import com.github.java4wro.user.security.SecurityAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +19,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDTO findUser(String userMail) {
@@ -29,7 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO addUSer(UserDTO userDTO) {
         User user=new User();
-        user.setPassword(userDTO.getPassword());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setEmail(userDTO.getEmail());
 
         return userMapper.toUserDTO(userRepository.save(user));

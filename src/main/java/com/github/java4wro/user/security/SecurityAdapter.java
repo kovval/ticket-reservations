@@ -21,12 +21,11 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests()
-                .antMatchers("/api/users").authenticated()
-                .anyRequest().permitAll();
+                .antMatchers("/api/users").permitAll();
 
 
         http.formLogin()
-                .loginPage("/api/users/login")
+                .loginPage("/api/users")
                 .usernameParameter("user")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/hello.html")
