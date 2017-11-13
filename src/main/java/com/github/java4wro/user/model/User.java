@@ -1,5 +1,6 @@
 package com.github.java4wro.user.model;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +21,7 @@ public class User extends BaseEntity {
 
     private String password;
 
-    private UserRole rola;
+    private UserRole role;
 
     private boolean enabled;
 

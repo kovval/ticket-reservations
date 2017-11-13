@@ -1,29 +1,27 @@
 package com.github.java4wro.user.security;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
 
-@Data
+@Getter
+@Setter
 public class UserDetailsImpl implements UserDetails {
 
-    private String email;
+    private String username;
     private String password;
 
-    public UserDetailsImpl(String email, String password) {
-        this.email = email;
+    public UserDetailsImpl(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public UserDetailsImpl() {
     }
 
     @Override
@@ -38,7 +36,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override
@@ -60,6 +58,7 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,12 +66,13 @@ public class UserDetailsImpl implements UserDetails {
 
         UserDetailsImpl that = (UserDetailsImpl) o;
 
-        if (email != null ? !email.equals(that.email) : that.email!= null) return false;
+        if (username != null ? !username.equals(that.username) : that.username != null) return false;
         return password != null ? password.equals(that.password) : that.password == null;
     }
+
     @Override
     public int hashCode() {
-        int result = email!= null ? email.hashCode() : 0;
+        int result = username != null ? username.hashCode() : 0;
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
     }

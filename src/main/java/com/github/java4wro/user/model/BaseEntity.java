@@ -1,6 +1,8 @@
 package com.github.java4wro.user.model;
 
-import lombok.Data;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
@@ -9,7 +11,9 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
+
 @MappedSuperclass
 public abstract class BaseEntity {
 

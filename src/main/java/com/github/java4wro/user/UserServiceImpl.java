@@ -5,6 +5,8 @@ import com.github.java4wro.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,10 +25,20 @@ public class UserServiceImpl implements UserService {
         }
         return userMapper.toUserDTO(user);
     }
-    public UserDTO addUser (User newUser){
-        User user = new User();
 
+    @Override
+    public void addUSer(UserDTO userDTO) {
+        User user=new User();
+        user.setPassword(userDTO.getPassword());
+        user.setEmail(userDTO.getEmail());
 
-        return null;
+        userRepository.save(user);
     }
+
+    @Override
+    public List<UserDTO> getAll() {
+        List<User> userList=userRepository.findAll();
+        return userMapper.toUserDTO(userList);
+    }
+
 }
