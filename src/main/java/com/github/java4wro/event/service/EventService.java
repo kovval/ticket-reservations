@@ -8,4 +8,5 @@ public interface EventService {
     EventDTO addEvent (EventDTO eventDTO);
 
 
+    EventDTO getEventByUuid(String eventUuid);
 }
