@@ -7,4 +7,5 @@ public interface EventService {
 
     EventDTO addEvent (EventDTO eventDTO);
 
+
 }

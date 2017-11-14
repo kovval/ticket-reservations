@@ -26,14 +26,16 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventDTO addEvent(EventDTO eventDTO) {
 
-        Event event = new Event();
+        Event event = eventMapper.toEvent(eventDTO);
 
-        event.setBasicPrice(eventDTO.getEventPrice());
-        event.setDateTime(eventDTO.getEventDateTime());
-        event.setTitle(eventDTO.getEventName());
+//        event.setBasicPrice(eventDTO.getEventPrice());
+//        event.setDateTime(eventDTO.getEventDateTime());
+//        event.setTitle(eventDTO.getEventName());
+
 
         event = eventRepository.save(event);
 
         return eventMapper.toEventDTO(event);
     }
+
 }
