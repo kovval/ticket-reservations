@@ -3,14 +3,14 @@ package com.github.java4wro.user;
 import com.github.java4wro.user.dto.UserDTO;
 import com.github.java4wro.user.emailService.EmailSender;
 import com.github.java4wro.user.exceptions.EmailExistException;
+import com.github.java4wro.user.exceptions.EmailNotExistException;
+import com.github.java4wro.user.exceptions.VerificationTimeExpiredException;
 import com.github.java4wro.user.model.User;
+import com.github.java4wro.user.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -32,8 +32,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO findUser(String userMail) {
         User user = userRepository.findOneByEmail(userMail);
+
         if(user==null){
-            throw new EmailExistException(userMail);
+            throw new EmailNotExistException(userMail);
         }
         return userMapper.toUserDTO(user);
     }
@@ -45,12 +46,15 @@ public class UserServiceImpl implements UserService {
             throw new EmailExistException(userDTO.getEmail());
         }
 
-            User user = new User();
-            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-            user.setEmail(userDTO.getEmail());
-            user.setEnabled(false);
+        User user = new User();
 
-            sendEmail(user.getEmail(), user.getUuid());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setEmail(userDTO.getEmail());
+        user.setEnabled(false);
+        user.setRole(UserRole.USER);
+
+        sendEmail(user.getEmail(), user.getUuid());
+        System.out.println(user.getRole().name());
 
         return userMapper.toUserDTO(userRepository.save(user));
     }
@@ -67,9 +71,12 @@ public class UserServiceImpl implements UserService {
 
         if (user!=null){
             Date now = new Date();
-            Date expiryDate = user.getCreatedAt();
-            user.setEnabled(true);
+            Date expiryDate = user.getExpiryDate();
+
+            if (expiryDate.compareTo(now)<0) user.setEnabled(true);
+            else throw new VerificationTimeExpiredException(user.getEmail(),expiryDate);
         }
+
         userRepository.save(user);
     }
 

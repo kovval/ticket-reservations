@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 
 @Entity
@@ -27,7 +28,7 @@ public class User extends BaseEntity {
     private boolean enabled;
 
     public Date getExpiryDate (){
-        return null;
+        return new Date(getCreatedAt().getTime()+ TimeUnit.DAYS.toMillis(1));
     }
 
 }

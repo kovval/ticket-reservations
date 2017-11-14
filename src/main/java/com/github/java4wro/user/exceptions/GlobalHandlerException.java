@@ -16,4 +16,20 @@ public class GlobalHandlerException {
                 (String.format("User with this email: %s already exist", e.getEmail()),
                         HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(EmailNotExistException.class)
+    @ResponseBody
+    public ResponseEntity<String> handleEmailExistException (EmailNotExistException e){
+        return new ResponseEntity<>
+                (String.format("User with this email: %s not exist", e.getEmail()),
+                        HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(VerificationTimeExpiredException.class)
+    @ResponseBody
+    public ResponseEntity<String> handleEmailExistException (VerificationTimeExpiredException e){
+        return new ResponseEntity<>
+                (String.format("User with this email: %s is expired at %s", e.getEmail(),e.getExpiredData().toString()),
+                        HttpStatus.BAD_REQUEST);
+    }
 }

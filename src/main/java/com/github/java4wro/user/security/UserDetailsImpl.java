@@ -1,13 +1,17 @@
 package com.github.java4wro.user.security;
 
+import com.github.java4wro.user.model.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,11 +20,13 @@ public class UserDetailsImpl implements UserDetails {
     private String username;
     private String password;
     private boolean enabled;
+    private String role;
 
-    public UserDetailsImpl(String username, String password, boolean enabled) {
+    public UserDetailsImpl(String username, String password, boolean enabled, UserRole role) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
+        this.role=role.name();
     }
 
     public UserDetailsImpl() {
@@ -28,7 +34,9 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.EMPTY_LIST;
+        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+        list.add(new SimpleGrantedAuthority("ROLE_" + role));
+        return list;
     }
 
     @Override

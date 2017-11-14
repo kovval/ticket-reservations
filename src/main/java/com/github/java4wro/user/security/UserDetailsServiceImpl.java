@@ -20,6 +20,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         User user = userRepository.findOneByEmail(email);
 
-        return new UserDetailsImpl(user.getEmail(),user.getPassword(),user.isEnabled());
+        return new UserDetailsImpl(user.getEmail(),user.getPassword(),user.isEnabled(),user.getRole());
     }
 }
