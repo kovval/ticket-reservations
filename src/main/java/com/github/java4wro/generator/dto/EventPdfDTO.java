@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class EventDTO {
+public class EventPdfDTO {
 
     private String eventName;
     private LocalDateTime eventDateAndTime;

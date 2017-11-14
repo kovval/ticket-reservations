@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class OwnerDTO {
+public class OwnerPdfDTO {
 
     private String name;
 

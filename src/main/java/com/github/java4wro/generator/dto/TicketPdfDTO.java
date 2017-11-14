@@ -1,7 +1,6 @@
 package com.github.java4wro.generator.dto;
 
 
-import com.github.java4wro.commons.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,17 +8,17 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class TicketDTO {
+public class TicketPdfDTO {
 
-    private String ticketId; // TODO uuid -> extends BaseEntity #Janek
+    private String ticketuuid; // TODO uuid -> extends BaseEntity #Janek
     private String row;
 
     public String getTicketId() {
-        return ticketId;
+        return ticketuuid;
     }
 
-    public void setTicketId(String ticketId) {
-        this.ticketId = ticketId;
+    public void setTicketId(String ticketUuid) {
+        this.ticketuuid = ticketUuid;
     }
 
     public String getRow() {
