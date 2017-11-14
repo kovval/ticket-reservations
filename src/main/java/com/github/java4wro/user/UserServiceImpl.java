@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
             Date now = new Date();
             Date expiryDate = user.getExpiryDate();
 
-            if (expiryDate.compareTo(now)<0) user.setEnabled(true);
+            if (expiryDate.compareTo(now)>0) user.setEnabled(true);
             else throw new VerificationTimeExpiredException(user.getEmail(),expiryDate);
         }
 
