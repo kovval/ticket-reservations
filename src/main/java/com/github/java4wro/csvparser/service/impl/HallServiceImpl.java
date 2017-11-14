@@ -24,13 +24,14 @@ public class HallServiceImpl implements HallService {
     }
 
     @Override
-    public void readFile() throws FileNotFoundException {
+    public void readFile(InputStream is) throws FileNotFoundException, UnsupportedEncodingException {
          File file;
          HashMap<String, Float> hall_1 = new HashMap<>();
          String line;
          final String UTF8_BOM = "\uFEFF";
         FileReader fis = new FileReader("src/main/resources/hall_1.csv");
-        BufferedReader br = new BufferedReader(fis);
+        BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+//        BufferedReader br = new BufferedReader(fis);
 
 
         int row = 1;
