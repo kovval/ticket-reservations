@@ -1,24 +1,18 @@
 package com.github.java4wro.generator;
 
-import com.github.java4wro.generator.dto.EventDTO;
-import com.github.java4wro.generator.dto.OwnerDTO;
-import com.github.java4wro.generator.dto.TicketDTO;
+import com.github.java4wro.generator.dto.EventPdfDTO;
+import com.github.java4wro.generator.dto.OwnerPdfDTO;
+import com.github.java4wro.generator.dto.TicketPdfDTO;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.mail.*;
 import org.springframework.stereotype.Service;
 
-
-import javax.mail.*;
+import javax.mail.MessagingException;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
@@ -26,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 public class GeneratorPDF {
 
 
-    public void generateAndSendTicket(EventDTO eventDTO, OwnerDTO ownerDTO, TicketDTO ticketDTO) throws IOException, MessagingException {
+    public void generateAndSendTicket(EventPdfDTO eventPdfDTO, OwnerPdfDTO ownerPdfDTO, TicketPdfDTO ticketDTO) throws IOException, MessagingException {
 
         PDDocument document = new PDDocument();
 
@@ -53,17 +47,16 @@ public class GeneratorPDF {
         contentStream.beginText();
         contentStream.setFont(font, 14);
         contentStream.moveTextPositionByAmount(100, 700);
-        contentStream.drawString("Event: " + eventDTO.getEventName());
+        contentStream.drawString("Event: " + eventPdfDTO.getEventName());
         contentStream.endText();
 
         //data
         contentStream.beginText();
         contentStream.setFont(font, 14);
         contentStream.moveTextPositionByAmount(100, 650);
-        String dataEvent = eventDTO.getEventDateAndTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        String dataEvent = eventPdfDTO.getEventDateAndTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         contentStream.drawString("Data: " + dataEvent);
         contentStream.endText();
-
 
         //cena wydarzenia
         contentStream.beginText();
@@ -76,7 +69,7 @@ public class GeneratorPDF {
         contentStream.beginText();
         contentStream.setFont(font, 14);
         contentStream.moveTextPositionByAmount(400, 700);
-        contentStream.drawString("Ticket for: " + ownerDTO.getEmail());
+        contentStream.drawString("Ticket for: " + ownerPdfDTO.getEmail());
         contentStream.endText();
 
         // Miejsce i Rząd
@@ -101,19 +94,23 @@ public class GeneratorPDF {
 
         //zapisywanie dokumentu
         contentStream.close();
-        document.save(eventDTO.getEventName() + ticketDTO.getTicketId().hashCode() + ".pdf");
+        document.save(eventPdfDTO.getEventName() + ticketDTO.getTicketId().hashCode() + ".pdf");
         document.close();
 
 
         // Wysyła wiadomosc, ma ustawionego maila na tego co trzeba brakuje jeszcze wstawienia załącznika
-        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
-
+//        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
         //wysyłanie wiadomości
-        MailMail ticketMail = (MailMail) context.getBean("mailMail");
-        ticketMail.sendMail(ownerDTO.getEmail(),
-                "Bilet w załącznikut",
-                (eventDTO.getEventName() + ticketDTO.getTicketId().hashCode() + ".pdf"),
-                ownerDTO.getEmail());
+//        MailMail ticketMail = (MailMail) context.getBean("mailMail");
+//        ticketMail.sendMail(ownerPdfDTO.getEmail(),
+//                "Bilet w załącznikut",
+//                (eventPdfDTO.getEventName() + ticketDTO.getTicketId().hashCode() + ".pdf"),
+//                ownerPdfDTO.getEmail());
+
+        EmailSender ticketMail = new EmailSenderImpl();
+        ticketMail.sendEmail(ownerPdfDTO.getEmail(),
+                "Bilet", "bilet w zalacnziku",
+                (eventPdfDTO.getEventName() + ticketDTO.getTicketId().hashCode() + ".pdf"));
 
 
     }
