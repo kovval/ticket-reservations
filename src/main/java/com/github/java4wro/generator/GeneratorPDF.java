@@ -28,7 +28,10 @@ public class GeneratorPDF {
         PDPage page = new PDPage();
         document.addPage(page);
 
-        String imageQR = "QR.jpg";
+
+        GeneratorPDF generatorPDF = new GeneratorPDF();
+        generatorPDF.generateAndSendTicket(eventPdfDTO, ownerPdfDTO, ticketDTO);
+        String imageQR = "QRCode.jpg";
 
         PDFont font = PDType1Font.TIMES_ROMAN;
 
@@ -97,15 +100,6 @@ public class GeneratorPDF {
         document.save(eventPdfDTO.getEventName() + ticketDTO.getTicketId().hashCode() + ".pdf");
         document.close();
 
-
-        // Wysyła wiadomosc, ma ustawionego maila na tego co trzeba brakuje jeszcze wstawienia załącznika
-//        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
-        //wysyłanie wiadomości
-//        MailMail ticketMail = (MailMail) context.getBean("mailMail");
-//        ticketMail.sendMail(ownerPdfDTO.getEmail(),
-//                "Bilet w załącznikut",
-//                (eventPdfDTO.getEventName() + ticketDTO.getTicketId().hashCode() + ".pdf"),
-//                ownerPdfDTO.getEmail());
 
         EmailSender ticketMail = new EmailSenderImpl();
         ticketMail.sendEmail(ownerPdfDTO.getEmail(),
