@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Hall_1_seat {
+public class Hall {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;

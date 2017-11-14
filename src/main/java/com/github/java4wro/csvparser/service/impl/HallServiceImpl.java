@@ -1,35 +1,38 @@
 package com.github.java4wro.csvparser.service.impl;
 
 
-import com.github.java4wro.csvparser.model.Hall_1_seat;
-import com.github.java4wro.csvparser.repository.Hall_1Repository;
+import com.github.java4wro.csvparser.model.Hall;
+import com.github.java4wro.csvparser.repository.HallRepository;
 import com.github.java4wro.csvparser.service.HallService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.List;
-
+@Service
 public class HallServiceImpl implements HallService {
-    private File file;
-    private HashMap<String, Float> hall_1 = new HashMap<>();
-    private String line;
-    private final String UTF8_BOM = "\uFEFF";
-    FileReader fis = new FileReader("src/main/java/com.github.java4wro/csvparser/hall_1.csv");
-    BufferedReader br = new BufferedReader(fis);
     @Autowired
-    private Hall_1Repository hall_1Repository;
+    private HallRepository hall_Repository;
 
     public HallServiceImpl() throws FileNotFoundException {
     }
 
     @Override
-    public List<Hall_1_seat> findAllSeats() {
-        return hall_1Repository.findAll();
+    public List<Hall> findAllSeats() {
+        return hall_Repository.findAll();
     }
 
     @Override
-    public void readFile() {
+    public void readFile() throws FileNotFoundException {
+         File file;
+         HashMap<String, Float> hall_1 = new HashMap<>();
+         String line;
+         final String UTF8_BOM = "\uFEFF";
+        FileReader fis = new FileReader("src/main/resources/hall_1.csv");
+        BufferedReader br = new BufferedReader(fis);
+
+
         int row = 1;
         try {
             while ((line = br.readLine()) != null) {
@@ -44,10 +47,10 @@ public class HallServiceImpl implements HallService {
                         sB.append(r);
                         sB.append(String.valueOf(i + 1));
                         hall_1.put(sB.toString(), Float.valueOf(singleRow[i]));
-                        Hall_1_seat newSeat = new Hall_1_seat();
+                        Hall newSeat = new Hall();
                         newSeat.setSeat(sB.toString());
                         newSeat.setValue(Float.valueOf(singleRow[i]));
-                        hall_1Repository.save(newSeat);
+                        hall_Repository.save(newSeat);
                     }
                 }
                 row++;
