@@ -1,4 +1,4 @@
-package com.github.java4wro.user.security;
+package com.github.java4wro.security;
 
 
 import org.springframework.context.annotation.Bean;

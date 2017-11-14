@@ -1,18 +1,20 @@
 package com.github.java4wro.user;
 
+import com.github.java4wro.emailService.EmailSender;
 import com.github.java4wro.user.dto.UserDTO;
-import com.github.java4wro.user.emailService.EmailSender;
 import com.github.java4wro.user.exceptions.EmailExistException;
 import com.github.java4wro.user.exceptions.EmailNotExistException;
 import com.github.java4wro.user.exceptions.VerificationTimeExpiredException;
 import com.github.java4wro.user.model.User;
 import com.github.java4wro.user.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 @Service
@@ -23,6 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -30,7 +33,7 @@ public class UserServiceImpl implements UserService {
     private EmailSender emailSender;
 
     @Override
-    public UserDTO findUser(String userMail) {
+    public UserDTO findUserbyEmail(String userMail) {
         User user = userRepository.findOneByEmail(userMail);
 
         if(user==null){
@@ -81,10 +84,17 @@ public class UserServiceImpl implements UserService {
     }
 
     private void sendEmail (String to, String token){
-        String content="http://localhost:8099//api/users/confirmRegistration/?token="+token;
+        String content="http://localhost:8099//api/users/confirmRegistration?token="+token;
         String subject="Confirm registration";
 
         emailSender.sendEmail(to,subject,content);
+    }
+
+    @Scheduled(cron ="* * 17-21 * * *")
+    private void deleteUnconfirmedUsers(){
+        Date dayAgo=new Date(new Date().getTime()- TimeUnit.DAYS.toMillis(1));
+        List<User> users=userRepository.findAllByEnabledAndCreatedAtBefore(false,dayAgo);
+        userRepository.delete(users);
     }
 
 }
