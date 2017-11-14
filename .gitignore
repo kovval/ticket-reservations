@@ -61,8 +61,8 @@ fabric.properties
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
 *.iml
-.idea/modules.xml
-.idea/misc.xml
+ .idea/modules.xml
+ .idea/misc.xml
 # *.ipr
 
 # Sonarlint plugin
