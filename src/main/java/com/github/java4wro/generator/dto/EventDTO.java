@@ -28,5 +28,4 @@ public class EventDTO {
     public void setEventDateAndTime(LocalDateTime eventDateAndTime) {
         this.eventDateAndTime = eventDateAndTime;
     }
-
 }
