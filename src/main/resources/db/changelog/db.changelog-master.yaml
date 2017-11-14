@@ -4,7 +4,7 @@ databaseChangeLog:
       author: xenteros
       changes:
         - createTable:
-            tableName: hall_1_seats
+            tableName: hall
             columns:
               - column:
                   name: id

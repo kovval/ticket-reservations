@@ -1,11 +1,9 @@
 package com.github.java4wro.csvparser.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "hall")
 public class Hall {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
