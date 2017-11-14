@@ -9,6 +9,7 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -19,6 +20,8 @@ import java.time.format.DateTimeFormatter;
 @Service
 public class GeneratorPDF {
 
+    @Autowired
+    private EmailSender emailSender;
 
     public void generateAndSendTicket(EventPdfDTO eventPdfDTO, OwnerPdfDTO ownerPdfDTO, TicketPdfDTO ticketDTO) throws IOException, MessagingException {
 
@@ -29,8 +32,8 @@ public class GeneratorPDF {
         document.addPage(page);
 
 
-        GeneratorPDF generatorPDF = new GeneratorPDF();
-        generatorPDF.generateAndSendTicket(eventPdfDTO, ownerPdfDTO, ticketDTO);
+        GeneratorQR generatorQR = new GeneratorQR();
+        generatorQR.generateQRCode(eventPdfDTO, ownerPdfDTO, ticketDTO);
         String imageQR = "QRCode.jpg";
 
         PDFont font = PDType1Font.TIMES_ROMAN;
@@ -101,12 +104,11 @@ public class GeneratorPDF {
         document.close();
 
 
-        EmailSender ticketMail = new EmailSenderImpl();
-        ticketMail.sendEmail(ownerPdfDTO.getEmail(),
+        emailSender.sendEmail(ownerPdfDTO.getEmail(),
                 "Bilet", "bilet w zalacnziku",
                 (eventPdfDTO.getEventName() + ticketDTO.getTicketId().hashCode() + ".pdf"));
 
-
     }
+
 
 }

@@ -21,8 +21,8 @@ public class EmailSenderImpl implements EmailSender {
        MimeMessage  mail = javaMailSender.createMimeMessage();
        try {
            MimeMessageHelper helper = new MimeMessageHelper(mail, true);
-           helper.setReplyTo("newsletter@codecouple.pl");
-           helper.setFrom("newsletter@codecouple.pl");
+           helper.setReplyTo("tiket.java@gmail.com");
+           helper.setFrom("tiket.java@gmail.com");
            helper.setSubject("tytul");
            helper.setText(content, true);
            FileSystemResource file = new FileSystemResource(path);
