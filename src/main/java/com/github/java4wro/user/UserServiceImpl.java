@@ -1,7 +1,7 @@
 package com.github.java4wro.user;
 
 import com.github.java4wro.user.dto.UserDTO;
-import com.github.java4wro.user.emailService.EmailSender;
+import com.github.java4wro.emailService.EmailSender;
 import com.github.java4wro.user.exceptions.EmailExistException;
 import com.github.java4wro.user.exceptions.EmailNotExistException;
 import com.github.java4wro.user.exceptions.VerificationTimeExpiredException;
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     private EmailSender emailSender;
 
     @Override
-    public UserDTO findUser(String userMail) {
+    public UserDTO findUserbyEmail(String userMail) {
         User user = userRepository.findOneByEmail(userMail);
 
         if(user==null){
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private void sendEmail (String to, String token){
-        String content="http://localhost:8099//api/users/confirmRegistration/?token="+token;
+        String content="http://localhost:8099//api/users/confirmRegistration?token="+token;
         String subject="Confirm registration";
 
         emailSender.sendEmail(to,subject,content);

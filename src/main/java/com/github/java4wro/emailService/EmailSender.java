@@ -1,4 +1,4 @@
-package com.github.java4wro.user.emailService;
+package com.github.java4wro.emailService;
 
 import org.springframework.stereotype.Service;
 

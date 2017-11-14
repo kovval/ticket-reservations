@@ -1,4 +1,4 @@
-package com.github.java4wro.user.emailService;
+package com.github.java4wro.emailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -10,7 +10,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Service
-public class EmailSenderImpl implements EmailSender{
+public class EmailSenderImpl implements EmailSender {
 
     @Autowired
     private JavaMailSender javaMailSender;

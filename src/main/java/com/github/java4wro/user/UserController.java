@@ -14,11 +14,11 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/getAll")
+    @GetMapping
     List<UserDTO> getAll(){
         return userService.getAll();
     }
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @PostMapping(value = "/register")
     public UserDTO addUser (UserDTO userDto) {
         return userService.addUser(userDto);
     }

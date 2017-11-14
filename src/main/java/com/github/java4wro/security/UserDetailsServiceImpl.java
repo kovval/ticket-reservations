@@ -1,4 +1,4 @@
-package com.github.java4wro.user.security;
+package com.github.java4wro.security;
 
 import com.github.java4wro.user.UserRepository;
 import com.github.java4wro.user.model.User;

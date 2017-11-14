@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService {
 
-    UserDTO findUser(String userEmail);
+    UserDTO findUserbyEmail(String userEmail);
     UserDTO addUser(UserDTO userDTO);
 
     List<UserDTO> getAll();

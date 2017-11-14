@@ -1,4 +1,4 @@
-package com.github.java4wro.user.security;
+package com.github.java4wro.security;
 
 import com.github.java4wro.user.model.UserRole;
 import lombok.Getter;
@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Getter
