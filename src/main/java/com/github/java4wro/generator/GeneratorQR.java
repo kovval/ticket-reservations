@@ -12,19 +12,7 @@ import java.io.*;
 @Service
 public class GeneratorQR{
 
-    private String qr_text = "Hello World!";
-    private String path = "QRCod.jpg";
-
-    public GeneratorQR() {
-    }
-
-    public String getQr_text() {
-        return qr_text;
-    }
-
-    public void setQr_text(String qr_text) {
-        this.qr_text = qr_text;
-    }
+    private String path = "QRCode.jpg";
 
     public String getPath() {
         return path;
@@ -38,7 +26,11 @@ public class GeneratorQR{
 
     public void generateQRCode(EventPdfDTO eventPdfDTO, OwnerPdfDTO ownerPdfDTO, TicketPdfDTO ticketPdfDTO){
 
-        ByteArrayOutputStream out = net.glxn.qrgen.javase.QRCode.from()
+        String prepareText = eventPdfDTO.getEventName()+eventPdfDTO.getEventDateAndTime()
+                +ownerPdfDTO.getEmail()+ticketPdfDTO.getTicketuuid()+ticketPdfDTO.getRow()
+                +ticketPdfDTO.getSeat()+ticketPdfDTO.getPrice();
+
+        ByteArrayOutputStream out = net.glxn.qrgen.javase.QRCode.from(prepareText)
                 .to(ImageType.JPG)
                 .stream();
 
@@ -55,15 +47,5 @@ public class GeneratorQR{
         } catch (IOException e){
             e.printStackTrace();
         }
-
     }
-
-
-    public static void main(String[] args) {
-        GeneratorQR qr = new GeneratorQR();
-        qr.generateQRCode();
-
-
-    }
-
 }
