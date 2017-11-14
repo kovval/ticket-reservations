@@ -20,5 +20,8 @@ public class EventController {
         return eventService.addEvent(eventDTO);
     }
 
-
+    @GetMapping("/{uuid}")
+    public EventDTO findAllEvent(@PathVariable("uuid") String eventUuid) {
+        return eventService.getEventByUuid(eventUuid);
+    }
 }

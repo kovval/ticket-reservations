@@ -38,4 +38,9 @@ public class EventServiceImpl implements EventService {
         return eventMapper.toEventDTO(event);
     }
 
+    @Override
+    public EventDTO getEventByUuid(String eventUuid) {
+        return null;
+    }
+
 }
