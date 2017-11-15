@@ -17,8 +17,7 @@ public class HallServiceImpl implements HallService {
     @Autowired
     private HallRepository hall_Repository;
 
-    public HallServiceImpl() throws FileNotFoundException {
-    }
+    public HallServiceImpl(){}
 
     @Override
     public List<Seat> findAllSeats() {

@@ -19,13 +19,8 @@ public class HallController {
     HallService hallService;
 
     @PostMapping("/api/upload")
-    public void createTable (@RequestParam("file")MultipartFile file){
-        try {
+        public void createTable (@RequestParam("file")MultipartFile file) throws IOException{
             hallService.readFile(file.getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     @GetMapping("/api/findall")
