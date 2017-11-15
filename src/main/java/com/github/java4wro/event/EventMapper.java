@@ -1,11 +1,12 @@
 package com.github.java4wro.event;
 
-import com.github.java4wro.dto.EventDTO;
+import com.github.java4wro.event.EventDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
-import org.springframework.context.annotation.Bean;
+
+import java.util.List;
 
 /**
  * Created by RENT on 2017-11-13.
@@ -20,16 +21,19 @@ public interface EventMapper {
             @Mapping(source = "dateTime", target = "dateAndTime")
     })
     EventDTO toEventDTO(Event event);
+    List<EventDTO> toEvents (List<Event> events);
     EventDTO toEventDTO(String eventUuid);
 
     @Mappings({
             @Mapping(source = "dateAndTime", target = "dateTime"),
             @Mapping(source = "eventName", target = "title"),
             @Mapping(source = "eventDescription", target = "description"),
-            @Mapping(source = "eventPrice", target = "basicPrice"),
+            @Mapping(source = "eventPrice", target = "basicPrice")
 
     })
+
     Event toEvent (EventDTO eventDTO);
+
 
 
 }
