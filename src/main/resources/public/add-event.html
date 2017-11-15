@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Event</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 </head>
 <body>
 <form action="/api/event/add" method="post">
@@ -17,30 +17,36 @@
                 <form method="post">
                     <!-- Date input -->
                     <div class="form-group">
-                        <label class="control-label" for="date">Data</label>
-                        <input class="form-control" id="date" placeholder="MM/DD/YYY" type="text"
-                               name="eventDateTime"/>
+                        <label class="control-label" for="date">Data i Czas</label>
+                        <input class="form-control" id="date" placeholder="YYY-MM-DD HH:MM" type="text"
+                               name="DateAndTime"/>
                     </div>
                 </form>
+            </div>
         </div>
-    </div>
-    <div class="submit-btn">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <!-- Submit button -->
-                    <div class="form-group">
-                        <button class="btn btn-primary " name="submit" type="submit">Submit</button>
+        <div class="submit-btn">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <!-- Submit button -->
+                        <div class="form-group">
+                            <button class="btn btn-primary " name="submit" type="submit">Submit</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </form>
 </body>
-
-<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
-<script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+<div class="container">
 </html>

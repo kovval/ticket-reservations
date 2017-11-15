@@ -1,5 +1,6 @@
 package com.github.java4wro.event;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.java4wro.commons.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
