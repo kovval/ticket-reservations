@@ -12,11 +12,15 @@ public class EventDTO {
 
     private BigDecimal eventPrice;
     private String eventName;
-    private String eventDescription;
-//    private LocalDateTime eventDateTime;
+    //    private LocalDateTime eventDateTime;
     private String dateAndTime;
+    private String eventDescription;
 
- 
+
+
+    public String getDateAndTime() {
+        return dateAndTime;
+    }
 
     public void setDateAndTime(String dateAndTime) {
         this.dateAndTime = dateAndTime;
