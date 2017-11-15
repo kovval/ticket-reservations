@@ -1,10 +1,9 @@
-package com.github.java4wro.event;
+package com.github.java4wro.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -12,11 +11,9 @@ public class EventDTO {
 
     private BigDecimal eventPrice;
     private String eventName;
-    //    private LocalDateTime eventDateTime;
-    private String dateAndTime;
     private String eventDescription;
-
-
+    private String dateAndTime;
+//    private LocalDateTime eventDateTime;
 
     public String getDateAndTime() {
         return dateAndTime;
@@ -26,6 +23,9 @@ public class EventDTO {
         this.dateAndTime = dateAndTime;
     }
 
+    public BigDecimal getEventPrice() {
+        return eventPrice;
+    }
 
     public void setEventPrice(BigDecimal eventPrice) {
         this.eventPrice = eventPrice;
@@ -46,17 +46,11 @@ public class EventDTO {
     public void setEventDescription(String eventDescription) {
         this.eventDescription = eventDescription;
     }
-    
-    public BigDecimal getEventPrice() {
-        return eventPrice;
-    }
-    //    }
-    //        this.eventDateTime = eventDateTime;
-    //    public EventDTO(LocalDateTime eventDateTime) {
-    //        return eventDateTime;
-    //    }
-    //
+
 //    public LocalDateTime getEventDateTime() {
+//        return eventDateTime;
+//    }
+//
 //    public void setEventDateTime(LocalDateTime eventDateTime) {
 //        this.eventDateTime = eventDateTime;
 //    }
