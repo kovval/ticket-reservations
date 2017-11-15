@@ -1,6 +1,5 @@
 package com.github.java4wro.event;
 
-import com.github.java4wro.event.EventDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -11,7 +10,7 @@ import java.util.List;
 /**
  * Created by RENT on 2017-11-13.
  */
-@Mapper(componentModel = "spring" ,unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface EventMapper {
 
     @Mappings({
@@ -21,7 +20,7 @@ public interface EventMapper {
             @Mapping(source = "dateTime", target = "dateAndTime")
     })
     EventDTO toEventDTO(Event event);
-    List<EventDTO> toEvents (List<Event> events);
+    List<EventDTO> toEventsDTO(List<Event> events);
     EventDTO toEventDTO(String eventUuid);
 
     @Mappings({
@@ -31,9 +30,6 @@ public interface EventMapper {
             @Mapping(source = "eventPrice", target = "basicPrice")
 
     })
-
-    Event toEvent (EventDTO eventDTO);
-
-
-
+    Event toEvent(EventDTO eventDTO);
+    List<Event> toEvents(List<Event> events);
 }

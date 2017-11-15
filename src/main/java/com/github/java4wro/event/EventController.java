@@ -19,7 +19,7 @@ public class EventController {
 
 
     @PostMapping("/add")
-    private EventDTO add(@RequestBody EventDTO eventDTO ){
+    private EventDTO add(@RequestBody EventDTO eventDTO) {
         return eventService.addEvent(eventDTO);
     }
 
@@ -29,9 +29,12 @@ public class EventController {
     }
 
     @GetMapping("/sortByTitle")
-    public List<EventDTO> findAllEventsByTitle(@RequestParam("title") String eventTitle){
+    public List<EventDTO> findAllEventsByTitle(@RequestParam("title") String eventTitle) {
         return eventService.getEventsByTitle(eventTitle);
     }
 
-
+    @GetMapping("/sortByDate")
+    public List<Event> findByDateTimeEquals(@RequestParam("date") String dateAndTime) {
+        return eventService.findByDateTimeEquals(dateAndTime);
+    }
 }
