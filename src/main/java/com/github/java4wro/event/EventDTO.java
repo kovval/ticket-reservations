@@ -1,4 +1,4 @@
-package com.github.java4wro.dto;
+package com.github.java4wro.event;
 
 import lombok.Getter;
 import lombok.Setter;

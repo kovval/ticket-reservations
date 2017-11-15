@@ -1,6 +1,6 @@
 package com.github.java4wro.event;
 
-import com.github.java4wro.dto.EventDTO;
+import com.github.java4wro.event.EventDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -22,6 +22,7 @@ public interface EventMapper {
     })
     EventDTO toEventDTO(Event event);
     List<EventDTO> toEvents (List<Event> events);
+    EventDTO toEventDTO(String eventUuid);
 
     @Mappings({
             @Mapping(source = "dateAndTime", target = "dateTime"),
