@@ -33,5 +33,9 @@ public class EventController {
         return eventService.getEventsByTitle(eventTitle);
     }
 
+//    @DeleteMapping("/deleteByTitle")
+//    public EventDTO deleteEventByTitle(@RequestParam("title") String eventTitle){
+//        return eventService.getEventsByTitle(eventTitle);
+//    }
 
 }

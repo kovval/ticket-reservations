@@ -12,4 +12,5 @@ public interface EventRepository extends JpaRepository<Event,Long> {
     List<Event> findByTitle(String title);
     List<EventDTO> findByDateTimeEquals(String dateAndTime);
     Event getEventByUuid (String eventUuid);
+    Event deleteByTitle(String title);
 }
