@@ -5,7 +5,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
-import org.springframework.context.annotation.Bean;
+
+import java.util.List;
 
 /**
  * Created by RENT on 2017-11-13.
@@ -20,16 +21,18 @@ public interface EventMapper {
             @Mapping(source = "dateTime", target = "dateAndTime")
     })
     EventDTO toEventDTO(Event event);
-    EventDTO toEventDTO(String eventUuid);
+    List<EventDTO> toEvents (List<Event> events);
 
     @Mappings({
             @Mapping(source = "dateAndTime", target = "dateTime"),
             @Mapping(source = "eventName", target = "title"),
             @Mapping(source = "eventDescription", target = "description"),
-            @Mapping(source = "eventPrice", target = "basicPrice"),
+            @Mapping(source = "eventPrice", target = "basicPrice")
 
     })
+
     Event toEvent (EventDTO eventDTO);
+
 
 
 }
