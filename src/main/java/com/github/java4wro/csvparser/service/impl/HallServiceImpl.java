@@ -37,11 +37,8 @@ public class HallServiceImpl implements HallService {
                 for (int i = 0; i < line.length; i++) {
                     if (Float.valueOf(line[i]) > 0) {
                         Character r = (char) (row + 64);
-                        StringBuilder sB = new StringBuilder();
-                        sB.append(r);
-                        sB.append(String.valueOf(i + 1));
                         Seat newSeat = new Seat();
-                        newSeat.setSeat(sB.toString());
+                        newSeat.setSeat(r.toString() + String.valueOf(i + 1));
                         newSeat.setValue(Float.valueOf(line[i]));
                         hall_Repository.save(newSeat);
                     }
