@@ -1,6 +1,6 @@
 package com.github.java4wro.csvparser.controller;
 
-import com.github.java4wro.csvparser.model.Hall;
+import com.github.java4wro.csvparser.model.Seat;
 import com.github.java4wro.csvparser.service.HallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +30,7 @@ public class HallController {
     }
 
     @GetMapping("/api/findall")
-    public List<Hall> findAll (){
+    public List<Seat> findAll (){
         return hallService.findAllSeats();
     }
 }

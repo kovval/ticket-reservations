@@ -1,15 +1,17 @@
 package com.github.java4wro.csvparser.service.impl;
 
 
-import com.github.java4wro.csvparser.model.Hall;
+import com.github.java4wro.csvparser.model.Seat;
 import com.github.java4wro.csvparser.repository.HallRepository;
 import com.github.java4wro.csvparser.service.HallService;
+import com.opencsv.CSVReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.List;
+
 @Service
 public class HallServiceImpl implements HallService {
     @Autowired
@@ -19,23 +21,21 @@ public class HallServiceImpl implements HallService {
     }
 
     @Override
-    public List<Hall> findAllSeats() {
+    public List<Seat> findAllSeats() {
         return hall_Repository.findAll();
     }
 
     @Override
-    public void readFile(InputStream is) throws FileNotFoundException, UnsupportedEncodingException {
-         File file;
-         HashMap<String, Float> hall_1 = new HashMap<>();
-         String line;
-         final String UTF8_BOM = "\uFEFF";
-        FileReader fis = new FileReader("src/main/resources/hall_1.csv");
-        BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-//        BufferedReader br = new BufferedReader(fis);
-
-
-        int row = 1;
+    public void readFile(InputStream is) throws IOException {
         try {
+            File file;
+            HashMap<String, Float> hall_1 = new HashMap<>();
+            String line;
+            final String UTF8_BOM = "\uFEFF";
+            BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+
+
+            int row = 1;
             while ((line = br.readLine()) != null) {
                 if (line.startsWith(UTF8_BOM)) {
                     line = line.substring(1);
@@ -48,7 +48,7 @@ public class HallServiceImpl implements HallService {
                         sB.append(r);
                         sB.append(String.valueOf(i + 1));
                         hall_1.put(sB.toString(), Float.valueOf(singleRow[i]));
-                        Hall newSeat = new Hall();
+                        Seat newSeat = new Seat();
                         newSeat.setSeat(sB.toString());
                         newSeat.setValue(Float.valueOf(singleRow[i]));
                         hall_Repository.save(newSeat);
@@ -56,8 +56,18 @@ public class HallServiceImpl implements HallService {
                 }
                 row++;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (UnsupportedEncodingException unEE) {
+            throw new IOException();
         }
+
+//        CSVReader reader = null;
+//        try {
+//            reader = new CSVReader(new InputStreamReader(is, "UTF-8"));
+//            String[] line;
+//
+//            while ((line = reader.readNext()) != null) {
+//
+//            }
+//        }
     }
 }
