@@ -12,8 +12,8 @@ public class EventDTO {
     private BigDecimal eventPrice;
     private String eventName;
     private String eventDescription;
-//    private LocalDateTime eventDateTime;
     private String dateAndTime;
+//    private LocalDateTime eventDateTime;
 
     public String getDateAndTime() {
         return dateAndTime;

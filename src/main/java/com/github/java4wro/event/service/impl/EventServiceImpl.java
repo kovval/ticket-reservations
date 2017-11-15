@@ -5,13 +5,9 @@ import com.github.java4wro.event.Event;
 import com.github.java4wro.event.EventMapper;
 import com.github.java4wro.event.EventRepository;
 import com.github.java4wro.event.service.EventService;
-import lombok.Getter;
-import lombok.Setter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 
 @Service
@@ -40,7 +36,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventDTO getEventByUuid(String eventUuid) {
-        return null;
+        Event event = eventRepository.getEventByUuid(eventUuid);
+        return eventMapper.toEventDTO(event);
     }
 
 }

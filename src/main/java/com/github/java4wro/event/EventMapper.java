@@ -20,6 +20,7 @@ public interface EventMapper {
             @Mapping(source = "dateTime", target = "dateAndTime")
     })
     EventDTO toEventDTO(Event event);
+    EventDTO toEventDTO(String eventUuid);
 
     @Mappings({
             @Mapping(source = "dateAndTime", target = "dateTime"),
@@ -29,4 +30,6 @@ public interface EventMapper {
 
     })
     Event toEvent (EventDTO eventDTO);
+
+
 }
