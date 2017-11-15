@@ -1,5 +1,6 @@
 package com.github.java4wro.generator;
 
+import com.github.java4wro.emailService.EmailSender;
 import com.github.java4wro.generator.dto.EventPdfDTO;
 import com.github.java4wro.generator.dto.OwnerPdfDTO;
 import com.github.java4wro.generator.dto.TicketPdfDTO;
@@ -10,6 +11,8 @@ import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -96,7 +99,7 @@ public class GeneratorPDF {
         contentStream.endText();
 
         //kod QR
-        contentStream.drawImage(image, 250, 450, 100, 100);
+        contentStream.drawImage(image, 200, 350, 200, 200);
 
         //zapisywanie dokumentu
         contentStream.close();
@@ -104,9 +107,21 @@ public class GeneratorPDF {
         document.close();
 
 
-        emailSender.sendEmail(ownerPdfDTO.getEmail(),
-                "Bilet", "bilet w zalacnziku",
-                (eventPdfDTO.getEventName() + ticketDTO.getTicketId().hashCode() + ".pdf"));
+//        emailSender.sendEmail(ownerPdfDTO.getEmail(),
+//                "Bilet", "bilet w zalacnziku",
+//                (eventPdfDTO.getEventName() + ticketDTO.getTicketId().hashCode() + ".pdf"));
+
+
+        // Wysyła wiadomosc, ma ustawionego maila na tego co trzeba brakuje jeszcze wstawienia załącznika
+        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
+
+        //wysyłanie wiadomości
+        MailMail ticketMail = (MailMail) context.getBean("mailMail");
+        ticketMail.sendMail(ownerPdfDTO.getEmail(),
+                "Bilet w załącznikut",
+                (eventPdfDTO.getEventName() + ticketDTO.getTicketId().hashCode() + ".pdf"),
+                ownerPdfDTO.getEmail());
+
 
     }
 

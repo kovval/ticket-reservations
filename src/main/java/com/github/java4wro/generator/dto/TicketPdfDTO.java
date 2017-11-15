@@ -4,7 +4,9 @@ package com.github.java4wro.generator.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
 import java.math.BigDecimal;
+
 
 @Getter
 @Setter

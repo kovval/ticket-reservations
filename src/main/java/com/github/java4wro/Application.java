@@ -57,6 +57,8 @@ public class Application implements CommandLineRunner{
                 .build();
     }
 
+
+
     @Override
     public void run(String... args) throws Exception {
         EventPdfDTO eventDTO = new EventPdfDTO();
@@ -64,14 +66,13 @@ public class Application implements CommandLineRunner{
         eventDTO.setEventDateAndTime(LocalDateTime.now());
 
         OwnerPdfDTO ownerDTO = new OwnerPdfDTO();
-        ownerDTO.setEmail("jan.kisiel22@gmail.com");
+        ownerDTO.setEmail("javawro4@gmail.com");
 
         TicketPdfDTO ticket = new TicketPdfDTO();
         ticket.setPrice(BigDecimal.valueOf(12.99));
         ticket.setRow("12");
         ticket.setSeat("10");
         ticket.setTicketId("12");
-
 
         generator.generateAndSendTicket(eventDTO, ownerDTO, ticket);
     }

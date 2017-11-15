@@ -1,6 +1,7 @@
 package com.github.java4wro.generator;
 
 
+import com.github.java4wro.emailService.EmailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
