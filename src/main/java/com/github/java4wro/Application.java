@@ -1,6 +1,6 @@
 package com.github.java4wro;
 
-import com.github.java4wro.ticket.Ticket;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

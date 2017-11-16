@@ -27,12 +27,8 @@ public class Event extends BaseEntity {
     private Long id;
 
     private String title;
-
-    private String description ;
-
+    private String description;
     private BigDecimal basicPrice;
-
     private LocalDateTime dateTime;
-
 }
 
