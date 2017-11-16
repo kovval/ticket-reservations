@@ -41,9 +41,8 @@ public class EventController {
           return ResponseEntity.ok().build();
     }
 
-
     @GetMapping("/findByDate/{date1}/{date2}")
-    public List<Event> findAllByDateTimeBetween(@PathVariable(value = "date1", required = false) String date1,
+    public List<EventDTO> findAllByDateTimeBetween(@PathVariable(value = "date1", required = false) String date1,
                                                 @PathVariable(value = "date2", required = false) String date2) {
 
         return eventService.findAllByDateTimeBetween(date1, date2);

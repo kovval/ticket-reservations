@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -14,6 +15,8 @@ public class EventDTO {
     private String eventDescription;
     private String dateAndTime;
 //    private LocalDateTime eventDateTime;
+
+
 
 
     public String getDateAndTime() {
@@ -48,14 +51,6 @@ public class EventDTO {
     public BigDecimal getEventPrice() {
         return eventPrice;
     }
-    //    }
-    //        this.eventDateTime = eventDateTime;
-    //    public EventDTO(LocalDateTime eventDateTime) {
-    //        return eventDateTime;
-    //    }
-    //
-//    public LocalDateTime getEventDateTime() {
-//    public void setEventDateTime(LocalDateTime eventDateTime) {
-//        this.eventDateTime = eventDateTime;
-//    }
+
+
 }

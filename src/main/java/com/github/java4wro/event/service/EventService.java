@@ -9,7 +9,7 @@ public interface EventService {
 
     EventDTO addEvent(EventDTO eventDTO);
 
-    List<Event> findAllByDateTimeBetween(String date1, String date2);
+    List<EventDTO> findAllByDateTimeBetween(String date1, String date2);
 
     EventDTO getEventByUuid(String eventUuid);
 

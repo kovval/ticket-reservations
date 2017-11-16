@@ -7,21 +7,14 @@
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 </head>
 <body>
-<form action="/api/event/add.html" method="post">
+<form action="/api/event/add" method="post">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <input class="form-control" type="text" placeholder="nazwa" name="eventName">
                 <input class="form-control" type="text" placeholder="opis" name="eventDescription">
                 <input class="form-control" type="text" placeholder="cena" name="eventPrice">
-                <form method="post">
-                    <!-- Date input -->
-                    <div class="form-group">
-                        <label class="control-label" for="date">Data i Czas</label>
-                        <input class="form-control" id="date" placeholder="YYY-mm-ddThh:mm:ss" type="text"
-                               name="DateAndTime"/>
-                    </div>
-                </form>
+                <input class="form-control" type="text" placeholder="YYY-mm-ddThh:mm:ss" name="DateAndTime">
             </div>
         </div>
         <div class="submit-btn">
