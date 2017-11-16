@@ -1,6 +1,6 @@
 package com.github.java4wro.ticket.service;
 
-
+//komentarz//
 import com.github.java4wro.ticket.TicketDTO;
 
 

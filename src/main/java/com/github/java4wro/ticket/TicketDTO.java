@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-
+//komentarz//
 @Getter
 @Setter
 public class TicketDTO {
