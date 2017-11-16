@@ -1,9 +1,13 @@
 package com.github.java4wro.emailService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -13,7 +17,14 @@ import javax.mail.internet.MimeMessage;
 public class EmailSenderImpl implements EmailSender {
 
     @Autowired
-    private JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
+
+    private static final Logger log = LoggerFactory.getLogger(EmailSenderImpl.class);
+
+    @Autowired
+    public EmailSenderImpl(JavaMailSender javaMailSender) {
+        this.javaMailSender = javaMailSender;
+    }
 
     @Override
     public void sendEmail(String to, String subject, String content) {
@@ -34,18 +45,21 @@ public class EmailSenderImpl implements EmailSender {
     }
 
     @Override
-    public void sendEmail(String to, String subject, String content, String path) throws MessagingException {
-        MimeMessage  mail = javaMailSender.createMimeMessage();
+    public void sendEmail(String to, String subject, String content, String path) {
+        MimeMessagePreparator preparator = new MimeMessagePreparator() {
+            @Override
+            public void prepare(MimeMessage mimeMessage) throws Exception {
+                MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
+                messageHelper.setTo(to);
+                messageHelper.setFrom("javawro4@gmail.com");
+                messageHelper.setSubject(subject);
+                messageHelper.setText(content);
+                FileSystemResource file = new FileSystemResource(path);
+                messageHelper.addAttachment(file.getFilename(), file);
+            }
+        };
 
-            MimeMessageHelper helper = new MimeMessageHelper(mail, true);
-            helper.setReplyTo("ticket.java@gmail.com");
-            helper.setFrom("ticket.java@gmail.com");
-            helper.setSubject("Ticket");
-            helper.setText(content, true);
-            FileSystemResource file = new FileSystemResource(path);
-            helper.addAttachment(file.getFilename(), file);
-
-        javaMailSender.send(mail);
+        this.javaMailSender.send(preparator);
 
     }
 
