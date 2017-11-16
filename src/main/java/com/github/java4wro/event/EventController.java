@@ -41,9 +41,7 @@ public class EventController {
           return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/sortByDate")
-    public List<Event> findByDateTimeEquals(@RequestBody String dateAndTime) {
-        return eventService.findByDateTimeEquals(dateAndTime);
+
     @GetMapping("/findByDate/{date1}/{date2}")
     public List<Event> findAllByDateTimeBetween(@PathVariable(value = "date1", required = false) String date1,
                                                 @PathVariable(value = "date2", required = false) String date2) {

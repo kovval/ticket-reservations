@@ -55,10 +55,11 @@ public class EventServiceImpl implements EventService {
 
     }
 
+
     @Override
     public List<EventDTO> getEventsByTitle(String eventTitle) {
         List<Event> listEvents = eventRepository.findByTitle(eventTitle);
-        return eventMapper.toEvents(listEvents);
+        return eventMapper.toEventsDTO(listEvents);
     }
 
     @Override
