@@ -5,10 +5,10 @@ import com.github.java4wro.event.Event;
 import com.github.java4wro.event.EventMapper;
 import com.github.java4wro.event.EventRepository;
 import com.github.java4wro.event.service.EventService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.*;
 import java.util.List;
 
 
@@ -32,12 +32,20 @@ public class EventServiceImpl implements EventService {
         return eventMapper.toEventDTO(event);
     }
 
-//    @Override
-//    public List<EventDTO> findByDateTimeEquals(String dateAndTime) throws RuntimeException {
-//        Event event = eventRepository.findByDateTimeEquals(dateAndTime);
-//
-//        return eventMapper.toEventDTO(event);
-//    }
+    @Override
+    public List<Event> findAllByDateTimeBetween(String date1, String date2) {
+        EventDTO event1 = new EventDTO();
+        EventDTO event2 = new EventDTO();
+        event1.setDateAndTime(date1);
+        event2.setDateAndTime(date2);
+        Instant instant1 = Instant.parse(date1);
+        Instant instant2 = Instant.parse(date2);
+        LocalDateTime localDateTime1 = LocalDateTime.ofInstant(instant1, ZoneId.of(ZoneOffset.UTC.getId()));
+        LocalDateTime localDateTime2 = LocalDateTime.ofInstant(instant2, ZoneId.of(ZoneOffset.UTC.getId()));
+
+        List<Event> eventByDate = eventRepository.findAllByDateTimeBetween(localDateTime1, localDateTime2);
+        return eventMapper.toEvents(eventByDate);
+    }
 
     @Override
     public EventDTO getEventByUuid(String eventUuid) {
@@ -49,8 +57,6 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<EventDTO> getEventsByTitle(String eventTitle) {
         List<Event> listEvents = eventRepository.findByTitle(eventTitle);
-        return eventMapper.toEvents(listEvents);
+        return eventMapper.toEventsDTO(listEvents);
     }
-
-
 }

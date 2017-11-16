@@ -12,6 +12,4 @@ public class EventDTO {
 
     private String eventName;
     private LocalDateTime eventDateAndTime;
-
-
 }
