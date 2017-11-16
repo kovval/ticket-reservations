@@ -19,6 +19,7 @@ import java.sql.SQLException;
 public class MainConfig {
 
 
+
     private static Connection getConnection() throws URISyntaxException, SQLException {
         URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
 
