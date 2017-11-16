@@ -20,9 +20,5 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @RequestMapping("/")
-    @ResponseBody
-    String home() {
-        return "Hello World!";
-    }
+
 }
