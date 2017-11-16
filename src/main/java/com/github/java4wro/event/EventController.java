@@ -33,8 +33,8 @@ public class EventController {
         return eventService.getEventsByTitle(eventTitle);
     }
 
-    @GetMapping("/sortByDate")
-    public List<Event> findByDateTimeEquals(@RequestParam("date") String dateAndTime) {
+    @PostMapping("/sortByDate")
+    public List<Event> findByDateTimeEquals(@RequestBody String dateAndTime) {
         return eventService.findByDateTimeEquals(dateAndTime);
     }
 }
