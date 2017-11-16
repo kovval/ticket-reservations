@@ -91,6 +91,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     foreignKeyName: event_id
+<<<<<<< HEAD
                     references: event(id)
         - createTable:
             tableName: hall

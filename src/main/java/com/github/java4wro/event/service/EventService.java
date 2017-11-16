@@ -9,9 +9,12 @@ public interface EventService {
 
     EventDTO addEvent(EventDTO eventDTO);
 
-    List<Event> findByDateTimeEquals(String dateAndTime);
+    List<Event> findAllByDateTimeBetween(String date1, String date2);
 
     EventDTO getEventByUuid(String eventUuid);
 
     List<EventDTO> getEventsByTitle(String eventTitle);
+
+    void deleteEventByUuid(String eventUuid);
+
 }

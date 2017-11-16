@@ -6,10 +6,10 @@ import com.github.java4wro.event.EventMapper;
 import com.github.java4wro.event.EventRepository;
 import com.github.java4wro.event.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.*;
 import java.util.List;
 
 
@@ -34,14 +34,17 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> findByDateTimeEquals(String dateAndTime) {
-        EventDTO event = new EventDTO();
-        event.setDateAndTime(dateAndTime);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-//        LocalDateTime localDateTime = LocalDateTime.parse(dateAndTime, formatter);
-        LocalDate localDate = LocalDate.parse(dateAndTime, formatter);
+    public List<Event> findAllByDateTimeBetween(String date1, String date2) {
+        EventDTO event1 = new EventDTO();
+        EventDTO event2 = new EventDTO();
+        event1.setDateAndTime(date1);
+        event2.setDateAndTime(date2);
+        Instant instant1 = Instant.parse(date1);
+        Instant instant2 = Instant.parse(date2);
+        LocalDateTime localDateTime1 = LocalDateTime.ofInstant(instant1, ZoneId.of(ZoneOffset.UTC.getId()));
+        LocalDateTime localDateTime2 = LocalDateTime.ofInstant(instant2, ZoneId.of(ZoneOffset.UTC.getId()));
 
-        List<Event> eventByDate = eventRepository.findByDateTimeEquals(localDate);
+        List<Event> eventByDate = eventRepository.findAllByDateTimeBetween(localDateTime1, localDateTime2);
         return eventMapper.toEvents(eventByDate);
     }
 
@@ -52,9 +55,20 @@ public class EventServiceImpl implements EventService {
 
     }
 
+
     @Override
     public List<EventDTO> getEventsByTitle(String eventTitle) {
         List<Event> listEvents = eventRepository.findByTitle(eventTitle);
         return eventMapper.toEventsDTO(listEvents);
     }
+
+    @Override
+    public void deleteEventByUuid(String eventUuid) {
+        Event event =eventRepository.getEventByUuid(eventUuid);
+        eventRepository.delete(event);
+    }
+
+
+
+
 }
