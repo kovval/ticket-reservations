@@ -1,14 +1,60 @@
 databaseChangeLog:
   - changeSet:
       id: 1
-      author: xenteros
+      author: liquidBase
       changes:
         - createTable:
-            tableName: hall
+            tableName: event
             columns:
               - column:
                   name: id
-                  type: int
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: basic_price
+                  type: decimal
+                  constraints:
+                    nullable: false
+              - column:
+                 name: date_time
+                 type: datetime
+                 constraints:
+                   nullable: false
+              - column:
+                 name: created_at
+                 type: datetime
+                 constraints:
+                   nullable: false
+              - column:
+                 name: last_update
+                 type: datetime
+                 constraints:
+                   nullable: true
+              - column:
+                 name: uuid
+                 type: varchar(255)
+                 constraints:
+                   nullable: false
+                   unique: true
+        - createTable:
+            tableName: ticket
+            columns:
+              - column:
+                  name: id
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
@@ -19,7 +65,30 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: value
-                  type: decimal(9,2)
+                  name: price
+                  type: decimal
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_at
+                  type: datetime
                   constraints:
                     nullable: false
+              - column:
+                  name: last_update
+                  type: datetime
+                  constraints:
+                    nullable: true
+              - column:
+                  name: uuid
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: event_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: event_id
+                    references: event(id)
