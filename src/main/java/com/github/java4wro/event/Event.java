@@ -1,6 +1,5 @@
 package com.github.java4wro.event;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.java4wro.commons.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,11 +27,12 @@ public class Event extends BaseEntity {
     private Long id;
 
     private String title;
+
     private String description ;
+
     private BigDecimal basicPrice;
+
     private LocalDateTime dateTime;
-
-
 
 }
 

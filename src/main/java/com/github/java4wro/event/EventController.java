@@ -45,4 +45,8 @@ public class EventController {
           return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/sortByDate")
+    public List<Event> findByDateTimeEquals(@RequestBody String dateAndTime) {
+        return eventService.findByDateTimeEquals(dateAndTime);
+    }
 }

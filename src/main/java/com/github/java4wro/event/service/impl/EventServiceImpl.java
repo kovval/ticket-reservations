@@ -5,11 +5,12 @@ import com.github.java4wro.event.Event;
 import com.github.java4wro.event.EventMapper;
 import com.github.java4wro.event.EventRepository;
 import com.github.java4wro.event.service.EventService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -33,12 +34,17 @@ public class EventServiceImpl implements EventService {
         return eventMapper.toEventDTO(event);
     }
 
-//    @Override
-//    public List<EventDTO> findByDateTimeEquals(String dateAndTime) throws RuntimeException {
-//        Event event = eventRepository.findByDateTimeEquals(dateAndTime);
-//
-//        return eventMapper.toEventDTO(event);
-//    }
+    @Override
+    public List<Event> findByDateTimeEquals(String dateAndTime) {
+        EventDTO event = new EventDTO();
+        event.setDateAndTime(dateAndTime);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+//        LocalDateTime localDateTime = LocalDateTime.parse(dateAndTime, formatter);
+        LocalDate localDate = LocalDate.parse(dateAndTime, formatter);
+
+        List<Event> eventByDate = eventRepository.findByDateTimeEquals(localDate);
+        return eventMapper.toEvents(eventByDate);
+    }
 
     @Override
     public EventDTO getEventByUuid(String eventUuid) {

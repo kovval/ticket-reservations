@@ -1,6 +1,8 @@
 package com.github.java4wro.ticket;
 
 
+import com.github.java4wro.commons.BaseEntity;
+import com.github.java4wro.event.Event;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,12 +12,18 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
-public class Ticket {
+public class Ticket extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String seat;
+
     private BigDecimal price;
+
+    @ManyToOne
+    private Event event;
+
 
     public Long getId() {
         return id;
