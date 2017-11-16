@@ -21,7 +21,7 @@ public class Ticket extends BaseEntity{
 
     private BigDecimal price;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Event event;
 
 
