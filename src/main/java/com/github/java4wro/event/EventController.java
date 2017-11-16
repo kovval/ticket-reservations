@@ -4,12 +4,8 @@ import com.github.java4wro.event.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
-/**
- * Created by RENT on 2017-11-13.
- */
 @RestController
 @RequestMapping("/api/event")
 public class EventController {
@@ -33,8 +29,10 @@ public class EventController {
         return eventService.getEventsByTitle(eventTitle);
     }
 
-    @PostMapping("/sortByDate")
-    public List<Event> findByDateTimeEquals(@RequestBody String dateAndTime) {
-        return eventService.findByDateTimeEquals(dateAndTime);
+    @GetMapping("/findByDate/{date1}/{date2}")
+    public List<Event> findAllByDateTimeBetween(@PathVariable(value = "date1", required = false) String date1,
+                                                @PathVariable(value = "date2", required = false) String date2) {
+
+        return eventService.findAllByDateTimeBetween(date1, date2);
     }
 }

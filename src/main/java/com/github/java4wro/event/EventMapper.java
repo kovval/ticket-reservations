@@ -7,9 +7,6 @@ import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-/**
- * Created by RENT on 2017-11-13.
- */
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface EventMapper {
 
@@ -20,7 +17,9 @@ public interface EventMapper {
             @Mapping(source = "dateTime", target = "dateAndTime")
     })
     EventDTO toEventDTO(Event event);
+
     List<EventDTO> toEventsDTO(List<Event> events);
+
     EventDTO toEventDTO(String eventUuid);
 
     @Mappings({
@@ -31,5 +30,6 @@ public interface EventMapper {
 
     })
     Event toEvent(EventDTO eventDTO);
+
     List<Event> toEvents(List<Event> events);
 }

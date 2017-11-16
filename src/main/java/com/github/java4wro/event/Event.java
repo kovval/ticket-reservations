@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -30,8 +29,6 @@ public class Event extends BaseEntity {
     private String title;
     private String description;
     private BigDecimal basicPrice;
-    //    private LocalDateTime dateTime;
-    private LocalDate dateTime;
-
+    private LocalDateTime dateTime;
 }
 
