@@ -7,6 +7,7 @@ import com.github.java4wro.event.EventRepository;
 import com.github.java4wro.event.service.EventService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,6 +52,14 @@ public class EventServiceImpl implements EventService {
         List<Event> listEvents = eventRepository.findByTitle(eventTitle);
         return eventMapper.toEvents(listEvents);
     }
+
+    @Override
+    public void deleteEventByUuid(String eventUuid) {
+        Event event =eventRepository.getEventByUuid(eventUuid);
+        eventRepository.delete(event);
+    }
+
+
 
 
 }
