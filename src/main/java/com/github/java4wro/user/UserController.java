@@ -15,17 +15,27 @@ public class UserController {
     UserService userService;
 
     @GetMapping
-    List<UserDTO> getAll(){
+    List<UserDTO> getAll() {
         return userService.getAll();
     }
+
     @PostMapping(value = "/register")
-    public UserDTO addUser (UserDTO userDto) {
+    public UserDTO addUser(UserDTO userDto) {
         return userService.addUser(userDto);
     }
 
     @GetMapping(value = "/confirmRegistration")
-    void confirmRegistration (@RequestParam("token") String token){
+    void confirmRegistration(@RequestParam("token") String token) {
         userService.confirmRegistration(token);
+    }
+
+    @PostMapping(value = "/forgotPassword")
+    void sendEmailWhenForgotPassword (String email, String newPassword, String confirmNewPassword) {
+        userService.sendEmailWhenForgotPassword(email, newPassword, confirmNewPassword);
+    }
+    @GetMapping(value = "/forgotPassword")
+    void changePasswordsWhenForgot(@RequestParam("token") String token){
+        userService.changePasswordsWhenForgot(token);
     }
 
 }
