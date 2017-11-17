@@ -22,7 +22,7 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/api/users/getAll").hasRole("ADMIN")
-                .antMatchers("/api/users/**" , "/registration.html" , "/login.html", "/logoutSuccess.html").permitAll()
+                .antMatchers("/api/users/**" , "/registration.html" , "/login.html", "/logoutSuccess.html","/forgotPassword.html").permitAll()
                 .anyRequest().authenticated();
 
 

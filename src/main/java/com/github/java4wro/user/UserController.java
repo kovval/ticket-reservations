@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/forgotPassword")
-    void sendEmailWhenForgotPassword (String email, String newPassword, String confirmNewPassword) {
+    void sendEmailWhenForgotPassword (@RequestParam("email") String email, @RequestParam ("newPassword") String newPassword, @RequestParam ("confirmNewPassword") String confirmNewPassword) {
         userService.sendEmailWhenForgotPassword(email, newPassword, confirmNewPassword);
     }
     @GetMapping(value = "/forgotPassword")

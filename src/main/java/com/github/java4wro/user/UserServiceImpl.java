@@ -88,14 +88,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void sendEmailWhenForgotPassword(String email, String newPassword, String confirmNewPassword) {
-//        User user = userRepository.findOneByEmail(email);
         if (!userRepository.existsByEmail(email)) {
-            throw new EmailExistException(email);
+            throw new EmailNotExistException(email);
         }
         if (!newPassword.equals(confirmNewPassword)) {
             throw new DifferentPasswordException();
         }
-        User user = userRepository.findOneByUuid(email);
+
+        User user = userRepository.findOneByEmail(email);
 
         user.setNewPassword(newPassword);
         userRepository.save(user);
