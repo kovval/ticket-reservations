@@ -32,6 +32,12 @@ public class GlobalHandlerException {
                 (String.format("User with this email: %s has expired at %s", e.getEmail(),e.getExpiredData().toString()),
                         HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler (NotIdenticalPasswordException.class)
+    @ResponseBody
+    public ResponseEntity<String> handleNotIdenticalPasswordException (NotIdenticalPasswordException e) {
+        return new ResponseEntity<>
+                (String.format("Password and confirmed password are not identical"), HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(DifferentPasswordException.class)
     @ResponseBody

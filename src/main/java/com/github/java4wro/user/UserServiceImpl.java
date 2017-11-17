@@ -1,11 +1,9 @@
 package com.github.java4wro.user;
 
 import com.github.java4wro.emailService.EmailSender;
+import com.github.java4wro.user.dto.RegisterUserDTO;
 import com.github.java4wro.user.dto.UserDTO;
-import com.github.java4wro.user.exceptions.DifferentPasswordException;
-import com.github.java4wro.user.exceptions.EmailExistException;
-import com.github.java4wro.user.exceptions.EmailNotExistException;
-import com.github.java4wro.user.exceptions.VerificationTimeExpiredException;
+import com.github.java4wro.user.exceptions.*;
 import com.github.java4wro.user.model.User;
 import com.github.java4wro.user.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +23,9 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private RegisterUserMapperDTO registerUserMapperDTO;
+
+    @Autowired
     private UserMapper userMapper;
 
     @Autowired
@@ -33,47 +34,48 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private EmailSender emailSender;
 
+
     @Override
-    public UserDTO findUserByEmail(String userMail) {
-        User user = userRepository.findOneByEmail(userMail);
+    public UserDTO findUserbyEmail(String userEmail) {
+        User user = userRepository.findOneByEmail(userEmail);
 
         if (user == null) {
-            throw new EmailNotExistException(userMail);
+            throw new EmailNotExistException(userEmail);
         }
         return userMapper.toUserDTO(user);
     }
 
     @Override
-    public UserDTO addUser(UserDTO userDTO) {
+    public RegisterUserDTO addUser(RegisterUserDTO registerUserDTO)  {
 
-        if (userRepository.existsByEmail(userDTO.getEmail())) {
-            throw new EmailExistException(userDTO.getEmail());
+        if (userRepository.existsByEmail(registerUserDTO.getEmail())) {
+            throw new EmailExistException(registerUserDTO.getEmail());
         }
 
         User user = new User();
-
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        user.setEmail(userDTO.getEmail());
+//        validationOfPasswordIdenitiy(registerUserDTO.getPassword(), registerUserDTO.getConfirmedPassword())
+        user.setPassword(passwordEncoder.encode(registerUserDTO.getPassword()));
+        user.setEmail(registerUserDTO.getEmail());
         user.setEnabled(false);
         user.setRole(UserRole.USER);
 
         sendEmailConfirmRegistration(user.getEmail(), user.getUuid());
         System.out.println(user.getRole().name());
 
-        return userMapper.toUserDTO(userRepository.save(user));
+        return registerUserMapperDTO.toRegistrationUserDTO(userRepository.save(user));
     }
 
     @Override
     public List<UserDTO> getAll() {
-        List<User> userList = userRepository.findAll();
+        List<User> userList=userRepository.findAll();
         return userMapper.toUserDTO(userList);
     }
 
     @Override
     public void confirmRegistration(String token) {
-        User user = userRepository.findOneByUuid(token);
+        User user=userRepository.findOneByUuid(token);
 
-        if (user != null) {
+        if (user!=null){
             Date now = new Date();
             Date expiryDate = user.getExpiryDate();
 
@@ -93,8 +95,6 @@ public class UserServiceImpl implements UserService {
         if (!newPassword.equals(confirmNewPassword)) {
             throw new DifferentPasswordException();
         }
-
-
         User user = userRepository.findOneByUuid(email);
 
         user.setNewPassword(newPassword);
@@ -118,21 +118,24 @@ public class UserServiceImpl implements UserService {
         String content = "http://localhost:8099//api/users/confirmRegistration?token=" + token;
         String subject = "Confirm registration";
 
-        emailSender.sendEmail(to, subject, content);
+        emailSender.sendEmail(to,subject,content);
     }
 
+    @Scheduled(cron ="* * 17-21 * * *")
+    private void deleteUnconfirmedUsers(){
+        Date dayAgo=new Date(new Date().getTime()- TimeUnit.DAYS.toMillis(1));
+        List<User> users=userRepository.findAllByEnabledAndCreatedAtBefore(false,dayAgo);
+        userRepository.delete(users);
+    }
+    @Override
+    public void validationOfPasswordIdenitiy(String password, String confiremPassword){
+        if (!password.equals(confiremPassword)){
+        throw  new NotIdenticalPasswordException();
+        }
+    }
     private void sendEmailForgotPassword(String to, String token) {
         String content = "http://localhost:8099//api/users/forgotPassword?token=" + token;
         String subject = "Changing password";
         emailSender.sendEmail(to, subject, content);
     }
-
-
-    @Scheduled(cron = "* * 17-21 * * *")
-    private void deleteUnconfirmedUsers() {
-        Date dayAgo = new Date(new Date().getTime() - TimeUnit.DAYS.toMillis(1));
-        List<User> users = userRepository.findAllByEnabledAndCreatedAtBefore(false, dayAgo);
-        userRepository.delete(users);
-    }
-
 }

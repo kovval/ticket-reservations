@@ -1,6 +1,7 @@
 package com.github.java4wro.user;
 
 
+import com.github.java4wro.user.dto.RegisterUserDTO;
 import com.github.java4wro.user.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +16,13 @@ public class UserController {
     UserService userService;
 
     @GetMapping
-    List<UserDTO> getAll() {
+    List<UserDTO> getAll(){
         return userService.getAll();
     }
-
     @PostMapping(value = "/register")
-    public UserDTO addUser(UserDTO userDto) {
-        return userService.addUser(userDto);
+    public RegisterUserDTO addUser (@RequestParam ("password") String password, @RequestParam("confirmedPassword") String confirmedPassword, RegisterUserDTO registerUserDTO) {
+        userService.validationOfPasswordIdenitiy(password, confirmedPassword);
+        return userService.addUser(registerUserDTO);
     }
 
     @GetMapping(value = "/confirmRegistration")
