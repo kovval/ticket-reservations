@@ -20,6 +20,7 @@ import javax.sql.DataSource;
 @EntityScan(basePackageClasses = {Application.class, Jsr310JpaConverters.class})
 public class Application {
 
+
     @Bean
     @Primary
     @ConfigurationProperties(prefix = "spring.datasource")
