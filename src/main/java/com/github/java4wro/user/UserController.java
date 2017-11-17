@@ -15,13 +15,13 @@ public class UserController {
     UserService userService;
 
     @GetMapping
-    List<UserDTO> getAll() {
+    List<UserDTO> getAll(){
         return userService.getAll();
     }
-
     @PostMapping(value = "/register")
-    public UserDTO addUser(UserDTO userDto) {
-        return userService.addUser(userDto);
+    public RegisterUserDTO addUser (@RequestParam ("password") String password, @RequestParam("confirmedPassword") String confirmedPassword, RegisterUserDTO registerUserDTO) {
+        userService.validationOfPasswordIdenitiy(password, confirmedPassword);
+        return userService.addUser(registerUserDTO);
     }
 
     @GetMapping(value = "/confirmRegistration")

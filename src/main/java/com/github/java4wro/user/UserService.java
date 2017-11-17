@@ -2,14 +2,13 @@ package com.github.java4wro.user;
 
 import com.github.java4wro.user.dto.UserDTO;
 
-
 import java.util.List;
+
 
 public interface UserService {
 
-    UserDTO findUserByEmail(String userEmail);
-
-    UserDTO addUser(UserDTO userDTO);
+    UserDTO findUserbyEmail(String userEmail);
+    RegisterUserDTO addUser(RegisterUserDTO registerUserDTO);
 
     List<UserDTO> getAll();
 
@@ -19,4 +18,6 @@ public interface UserService {
 
     void changePasswordsWhenForgot (String token);
 
+
+    void validationOfPasswordIdenitiy(String password, String confiremPassword);
 }
