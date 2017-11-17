@@ -2,6 +2,7 @@ package com.github.java4wro.user;
 
 import com.github.java4wro.emailService.EmailSender;
 import com.github.java4wro.user.dto.UserDTO;
+import com.github.java4wro.user.exceptions.DifferentPasswordException;
 import com.github.java4wro.user.exceptions.EmailExistException;
 import com.github.java4wro.user.exceptions.EmailNotExistException;
 import com.github.java4wro.user.exceptions.VerificationTimeExpiredException;
@@ -33,17 +34,17 @@ public class UserServiceImpl implements UserService {
     private EmailSender emailSender;
 
     @Override
-    public UserDTO findUserbyEmail(String userMail) {
+    public UserDTO findUserByEmail(String userMail) {
         User user = userRepository.findOneByEmail(userMail);
 
-        if(user==null){
+        if (user == null) {
             throw new EmailNotExistException(userMail);
         }
         return userMapper.toUserDTO(user);
     }
 
     @Override
-    public UserDTO addUser(UserDTO userDTO)  {
+    public UserDTO addUser(UserDTO userDTO) {
 
         if (userRepository.existsByEmail(userDTO.getEmail())) {
             throw new EmailExistException(userDTO.getEmail());
@@ -56,7 +57,7 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(false);
         user.setRole(UserRole.USER);
 
-        sendEmail(user.getEmail(), user.getUuid());
+        sendEmailConfirmRegistration(user.getEmail(), user.getUuid());
         System.out.println(user.getRole().name());
 
         return userMapper.toUserDTO(userRepository.save(user));
@@ -64,36 +65,73 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> getAll() {
-        List<User> userList=userRepository.findAll();
+        List<User> userList = userRepository.findAll();
         return userMapper.toUserDTO(userList);
     }
 
     @Override
     public void confirmRegistration(String token) {
-        User user=userRepository.findOneByUuid(token);
+        User user = userRepository.findOneByUuid(token);
 
-        if (user!=null){
+        if (user != null) {
             Date now = new Date();
             Date expiryDate = user.getExpiryDate();
 
-            if (expiryDate.compareTo(now)>0) user.setEnabled(true);
-            else throw new VerificationTimeExpiredException(user.getEmail(),expiryDate);
+            if (expiryDate.compareTo(now) > 0) user.setEnabled(true);
+            else throw new VerificationTimeExpiredException(user.getEmail(), expiryDate);
         }
 
         userRepository.save(user);
     }
 
-    private void sendEmail (String to, String token){
-        String content="http://localhost:8099//api/users/confirmRegistration?token="+token;
-        String subject="Confirm registration";
+    @Override
+    public void sendEmailWhenForgotPassword(String email, String newPassword, String confirmNewPassword) {
+//        User user = userRepository.findOneByEmail(email);
+        if (!userRepository.existsByEmail(email)) {
+            throw new EmailExistException(email);
+        }
+        if (!newPassword.equals(confirmNewPassword)) {
+            throw new DifferentPasswordException();
+        }
 
-        emailSender.sendEmail(to,subject,content);
+
+        User user = userRepository.findOneByUuid(email);
+
+        user.setNewPassword(newPassword);
+        userRepository.save(user);
+        sendEmailForgotPassword(user.getEmail(), user.getUuid());
+
     }
 
-    @Scheduled(cron ="* * 17-21 * * *")
-    private void deleteUnconfirmedUsers(){
-        Date dayAgo=new Date(new Date().getTime()- TimeUnit.DAYS.toMillis(1));
-        List<User> users=userRepository.findAllByEnabledAndCreatedAtBefore(false,dayAgo);
+    @Override
+    public void changePasswordsWhenForgot(String token) {
+        User user = userRepository.findOneByUuid(token);
+
+        user.setPassword(passwordEncoder.encode(user.getNewPassword()));
+        user.setNewPassword(null);
+
+        userRepository.save(user);
+    }
+
+
+    private void sendEmailConfirmRegistration(String to, String token) {
+        String content = "http://localhost:8099//api/users/confirmRegistration?token=" + token;
+        String subject = "Confirm registration";
+
+        emailSender.sendEmail(to, subject, content);
+    }
+
+    private void sendEmailForgotPassword(String to, String token) {
+        String content = "http://localhost:8099//api/users/forgotPassword?token=" + token;
+        String subject = "Changing password";
+        emailSender.sendEmail(to, subject, content);
+    }
+
+
+    @Scheduled(cron = "* * 17-21 * * *")
+    private void deleteUnconfirmedUsers() {
+        Date dayAgo = new Date(new Date().getTime() - TimeUnit.DAYS.toMillis(1));
+        List<User> users = userRepository.findAllByEnabledAndCreatedAtBefore(false, dayAgo);
         userRepository.delete(users);
     }
 
