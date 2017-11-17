@@ -24,6 +24,8 @@ public class GeneratorQR{
 
     public void generateQRCode(EventPdfDTO eventPdfDTO, OwnerPdfDTO ownerPdfDTO, TicketPdfDTO ticketPdfDTO){
 
+        setPath(ticketPdfDTO.getTicketuuid()+".jpg");
+
         String prepareText = eventPdfDTO.getEventName()+eventPdfDTO.getEventDateAndTime()
                 +ownerPdfDTO.getEmail()+ticketPdfDTO.getTicketuuid()+ticketPdfDTO.getRow()
                 +ticketPdfDTO.getSeat()+ticketPdfDTO.getPrice();

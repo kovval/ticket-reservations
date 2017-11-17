@@ -1,9 +1,6 @@
 package com.github.java4wro.emailService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -17,9 +14,8 @@ import javax.mail.internet.MimeMessage;
 public class EmailSenderImpl implements EmailSender {
 
     @Autowired
-    private final JavaMailSender javaMailSender;
+    private JavaMailSender javaMailSender;
 
-    private static final Logger log = LoggerFactory.getLogger(EmailSenderImpl.class);
 
     @Autowired
     public EmailSenderImpl(JavaMailSender javaMailSender) {
@@ -60,7 +56,6 @@ public class EmailSenderImpl implements EmailSender {
         };
 
         this.javaMailSender.send(preparator);
-
     }
 
 }

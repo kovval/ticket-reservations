@@ -11,8 +11,6 @@ import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -34,10 +32,9 @@ public class GeneratorPDF {
         PDPage page = new PDPage();
         document.addPage(page);
 
-
         GeneratorQR generatorQR = new GeneratorQR();
         generatorQR.generateQRCode(eventPdfDTO, ownerPdfDTO, ticketDTO);
-        String imageQR = "QRCode.jpg";
+        String imageQR = ticketDTO.getTicketuuid() + ".jpg";
 
         PDFont font = PDType1Font.TIMES_ROMAN;
 
@@ -45,10 +42,9 @@ public class GeneratorPDF {
         PDImageXObject image = PDImageXObject.createFromFile(imageQR, document);
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-
         contentStream.beginText();
         contentStream.setFont(font, 25);
-        contentStream.moveTextPositionByAmount(180, 750);
+        contentStream.moveTextPositionByAmount(160, 750);
         contentStream.drawString("NARODOWE FORUM MUZYKI ");
         contentStream.endText();
 
@@ -106,9 +102,10 @@ public class GeneratorPDF {
         document.save(eventPdfDTO.getEventName() + ticketDTO.getTicketId().hashCode() + ".pdf");
         document.close();
 
-        emailSender.sendEmail(ownerPdfDTO.getEmail(),
-                "Bilet", "bilet w zalacnziku",
-                eventPdfDTO.getEventName() + ticketDTO.getTicketId().hashCode() + ".pdf");
-    }
 
+        emailSender.sendEmail(ownerPdfDTO.getEmail(),
+                "Bilet", "Bilet w załączniku",
+                (eventPdfDTO.getEventName() + ticketDTO.getTicketuuid().hashCode() + ".pdf"));
+
+    }
 }
