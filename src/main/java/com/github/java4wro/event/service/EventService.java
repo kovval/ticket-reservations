@@ -1,6 +1,5 @@
 package com.github.java4wro.event.service;
 
-import com.github.java4wro.event.Event;
 import com.github.java4wro.event.EventDTO;
 
 import java.util.List;

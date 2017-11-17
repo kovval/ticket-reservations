@@ -6,12 +6,10 @@ import com.github.java4wro.event.EventMapper;
 import com.github.java4wro.event.EventRepository;
 import com.github.java4wro.event.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.*;
 import java.util.List;
-
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -56,7 +54,6 @@ public class EventServiceImpl implements EventService {
 
     }
 
-
     @Override
     public List<EventDTO> getEventsByTitle(String eventTitle) {
         List<Event> listEvents = eventRepository.findByTitle(eventTitle);
@@ -68,8 +65,4 @@ public class EventServiceImpl implements EventService {
         Event event =eventRepository.getEventByUuid(eventUuid);
         eventRepository.delete(event);
     }
-
-
-
-
 }

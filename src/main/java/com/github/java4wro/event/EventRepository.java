@@ -11,6 +11,4 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     Event getEventByUuid(String eventUuid);
 
     List<Event> findAllByDateTimeBetween(LocalDateTime date1, LocalDateTime date2);
-
-
 }

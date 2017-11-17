@@ -7,7 +7,6 @@ import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
-//komentarz//
 @Mapper(componentModel = "spring" ,unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface TicketMapper {
 
@@ -16,6 +15,7 @@ public interface TicketMapper {
             @Mapping(source = "price", target = "ticketPrice")
     })
     TicketDTO toTicketDTO (Ticket ticket);
+    List<TicketDTO> toTicketListDTO (List<Ticket> tickets);
 
 
 }
