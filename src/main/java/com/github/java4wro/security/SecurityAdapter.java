@@ -22,7 +22,7 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/api/users/getAll").hasRole("ADMIN")
-                .antMatchers("/api/users/**" , "/registration.html" , "/login.html").permitAll()
+                .antMatchers("/api/users/**" , "/registration.html" , "/login.html", "/logoutSuccess.html").permitAll()
                 .anyRequest().authenticated();
 
 
@@ -34,6 +34,13 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/hello.html")
                 .failureHandler((request, response, exception) -> response.sendError(HttpStatus.BAD_REQUEST.value(),
                         "Email or password invalid"));
+
+        http.logout()
+                .logoutUrl("/logout")
+                .invalidateHttpSession(true)
+                .logoutSuccessUrl("/logoutSuccess.html")
+                .permitAll();
+
     }
 
     @Bean
