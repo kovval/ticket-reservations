@@ -1,6 +1,7 @@
 package com.github.java4wro.user;
 
 
+import com.github.java4wro.user.dto.RegisterUserDTO;
 import com.github.java4wro.user.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

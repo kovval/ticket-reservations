@@ -1,5 +1,6 @@
 package com.github.java4wro.user;
 
+import com.github.java4wro.user.dto.RegisterUserDTO;
 import com.github.java4wro.user.dto.UserDTO;
 
 import java.util.List;

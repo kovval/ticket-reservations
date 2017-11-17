@@ -1,10 +1,9 @@
 package com.github.java4wro.user;
 
 import com.github.java4wro.emailService.EmailSender;
+import com.github.java4wro.user.dto.RegisterUserDTO;
 import com.github.java4wro.user.dto.UserDTO;
-import com.github.java4wro.user.exceptions.EmailExistException;
-import com.github.java4wro.user.exceptions.EmailNotExistException;
-import com.github.java4wro.user.exceptions.VerificationTimeExpiredException;
+import com.github.java4wro.user.exceptions.*;
 import com.github.java4wro.user.model.User;
 import com.github.java4wro.user.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,9 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private RegisterUserMapperDTO registerUserMapperDTO;
+
+    @Autowired
     private UserMapper userMapper;
 
     @Autowired
@@ -32,12 +34,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private EmailSender emailSender;
 
+
     @Override
-    public UserDTO findUserByEmail(String userMail) {
-        User user = userRepository.findOneByEmail(userMail);
+    public UserDTO findUserbyEmail(String userEmail) {
+        User user = userRepository.findOneByEmail(userEmail);
 
         if (user == null) {
-            throw new EmailNotExistException(userMail);
+            throw new EmailNotExistException(userEmail);
         }
         return userMapper.toUserDTO(user);
     }
@@ -56,7 +59,7 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(false);
         user.setRole(UserRole.USER);
 
-        sendEmail(user.getEmail(), user.getUuid());
+        sendEmailConfirmRegistration(user.getEmail(), user.getUuid());
         System.out.println(user.getRole().name());
 
         return registerUserMapperDTO.toRegistrationUserDTO(userRepository.save(user));
@@ -92,8 +95,6 @@ public class UserServiceImpl implements UserService {
         if (!newPassword.equals(confirmNewPassword)) {
             throw new DifferentPasswordException();
         }
-
-
         User user = userRepository.findOneByUuid(email);
 
         user.setNewPassword(newPassword);
@@ -131,8 +132,10 @@ public class UserServiceImpl implements UserService {
         if (!password.equals(confiremPassword)){
         throw  new NotIdenticalPasswordException();
         }
-
-
     }
-
+    private void sendEmailForgotPassword(String to, String token) {
+        String content = "http://localhost:8099//api/users/forgotPassword?token=" + token;
+        String subject = "Changing password";
+        emailSender.sendEmail(to, subject, content);
+    }
 }
