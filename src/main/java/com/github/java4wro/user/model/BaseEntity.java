@@ -1,15 +1,20 @@
 package com.github.java4wro.user.model;
 
-import lombok.Data;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
+
 @MappedSuperclass
 public abstract class BaseEntity {
 
@@ -24,9 +29,9 @@ public abstract class BaseEntity {
     @PrePersist
     public void prePersist() {
         if (createdAt == null) {
-            createdAt = new Date();
+            createdAt =new Date();
         } else {
-            lastUpdate = new Date();
+            lastUpdate =new Date();
         }
     }
 
