@@ -57,7 +57,6 @@ public class UserServiceImpl implements UserService {
         user.setRole(UserRole.USER);
 
         sendEmail(user.getEmail(), user.getUuid());
-        System.out.println(user.getRole().name());
 
         return userMapper.toUserDTO(userRepository.save(user));
     }
@@ -83,18 +82,18 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Scheduled(cron ="0 0 17 * * *")
+    private void deleteUnconfirmedUsers(){
+        Date dayAgo=new Date(new Date().getTime()- TimeUnit.DAYS.toMillis(1));
+        List<User> users=userRepository.findAllByEnabledAndCreatedAtBefore(false,dayAgo);
+        userRepository.delete(users);
+    }
+
     private void sendEmail (String to, String token){
         String content="http://localhost:8099//api/users/confirmRegistration?token="+token;
         String subject="Confirm registration";
 
         emailSender.sendEmail(to,subject,content);
-    }
-
-    @Scheduled(cron ="* * 17-21 * * *")
-    private void deleteUnconfirmedUsers(){
-        Date dayAgo=new Date(new Date().getTime()- TimeUnit.DAYS.toMillis(1));
-        List<User> users=userRepository.findAllByEnabledAndCreatedAtBefore(false,dayAgo);
-        userRepository.delete(users);
     }
 
 }

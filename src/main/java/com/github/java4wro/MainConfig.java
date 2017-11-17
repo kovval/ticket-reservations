@@ -24,4 +24,6 @@ public class MainConfig {
 
         return DriverManager.getConnection(dbUrl, username, password);
     }
+
+
 }
