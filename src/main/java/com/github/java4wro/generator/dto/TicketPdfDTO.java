@@ -47,6 +47,7 @@ public class TicketPdfDTO {
         this.price = price;
     }
 
+
     private String seat;
     private BigDecimal price;
 

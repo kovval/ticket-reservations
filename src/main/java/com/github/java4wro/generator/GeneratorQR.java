@@ -22,8 +22,6 @@ public class GeneratorQR{
         this.path = path;
     }
 
-
-
     public void generateQRCode(EventPdfDTO eventPdfDTO, OwnerPdfDTO ownerPdfDTO, TicketPdfDTO ticketPdfDTO){
 
         String prepareText = eventPdfDTO.getEventName()+eventPdfDTO.getEventDateAndTime()

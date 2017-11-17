@@ -106,13 +106,9 @@ public class GeneratorPDF {
         document.save(eventPdfDTO.getEventName() + ticketDTO.getTicketId().hashCode() + ".pdf");
         document.close();
 
-
         emailSender.sendEmail(ownerPdfDTO.getEmail(),
                 "Bilet", "bilet w zalacnziku",
                 eventPdfDTO.getEventName() + ticketDTO.getTicketId().hashCode() + ".pdf");
-
-
     }
-
 
 }
