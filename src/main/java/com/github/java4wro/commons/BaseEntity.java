@@ -15,8 +15,10 @@ public abstract class BaseEntity implements Serializable {
 
     @Column(unique = true)
     private String uuid = UUID.randomUUID().toString();
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;
 
