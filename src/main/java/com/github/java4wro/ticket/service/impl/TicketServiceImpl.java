@@ -31,7 +31,7 @@ public class TicketServiceImpl implements TicketService {
     private HallRepository hallRepository;
 
 
-    @Override //TODO
+    @Override
     public TicketDTO addTicket (String eventUuid, String seat, Integer price, String email ){
         Ticket ticket = ticketMapper.toTicket();
         ticket = ticketRepository.save(ticket);
