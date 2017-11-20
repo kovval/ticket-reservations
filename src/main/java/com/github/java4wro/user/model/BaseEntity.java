@@ -4,11 +4,7 @@ package com.github.java4wro.user.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.time.LocalDateTime;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
@@ -25,6 +21,7 @@ public abstract class BaseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;
 
+    @PreUpdate
     @PrePersist
     public void prePersist() {
         if (createdAt == null) {
