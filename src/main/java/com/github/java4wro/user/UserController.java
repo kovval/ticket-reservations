@@ -30,18 +30,26 @@ public class UserController {
     @GetMapping(value = "/confirmRegistration")
     public ModelAndView confirmRegistration(@RequestParam("token") String token) {
         userService.confirmRegistration(token);
-        return new ModelAndView("redirect:/login.html");
+        return new ModelAndView ("redirect:/login.html");
+    }
+
+    @PostMapping(value = "/forgotPassword")
+    public void sendEmailWhenForgotPassword (@RequestParam("email") String email, @RequestParam ("newPassword") String newPassword, @RequestParam ("confirmNewPassword") String confirmNewPassword) {
+        userService.sendEmailWhenForgotPassword(email, newPassword, confirmNewPassword);
+    }
+    @GetMapping(value = "/forgotPassword")
+    public void changePasswordsWhenForgot(@RequestParam("token") String token){
+        userService.changePasswordsWhenForgot(token);
+        return new ModelAndView("redirect:/forgotPasswordChangeSuccessful.html");
     }
 
     @PostMapping(value = "/resetPassword")
-    public void sendEmailWhenForgotPassword(@RequestParam("email") String email, @RequestParam("newPassword") String newPassword, @RequestParam("confirmNewPassword") String confirmNewPassword) {
-        userService.sendEmailWhenForgotPassword(email, newPassword, confirmNewPassword);
+    void sendEmailWhenResetPassword (@RequestParam("email") String email, @RequestParam ("newPassword") String newPassword, @RequestParam ("confirmNewPassword") String confirmNewPassword) {
+        userService.sendEmailWhenResetPassword(email, newPassword, confirmNewPassword);
     }
-
     @GetMapping(value = "/resetPassword")
-    public ModelAndView changePasswordsWhenForgot(@RequestParam("token") String token) {
-        userService.changePasswordsWhenForgot(token);
-        return new ModelAndView("redirect:/forgotPasswordChangeSuccessful.html");
+    void changePasswordsWhenReset(@RequestParam("token") String token){
+        userService.changePasswordsWhenReset(token);
     }
 
 }

@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public RegisterUserDTO addUser(RegisterUserDTO registerUserDTO)  {
+    public RegisterUserDTO addUser(RegisterUserDTO registerUserDTO) {
 
         if (userRepository.existsByEmail(registerUserDTO.getEmail())) {
             throw new EmailExistException(registerUserDTO.getEmail());
@@ -67,15 +67,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> getAll() {
-        List<User> userList=userRepository.findAll();
+        List<User> userList = userRepository.findAll();
         return userMapper.toUserDTO(userList);
     }
 
     @Override
     public void confirmRegistration(String token) {
-        User user=userRepository.findOneByUuid(token);
+        User user = userRepository.findOneByUuid(token);
 
-        if (user!=null){
+        if (user != null) {
             Date now = new Date();
             Date expiryDate = user.getExpiryDate();
 
@@ -113,29 +113,67 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public void sendEmailWhenResetPassword(String email, String newPassword, String confirmNewPassword) {
+
+        User user = userRepository.findOneByEmail(email);
+        if (!userRepository.existsByEmail(email)) {
+            throw new EmailExistException(email);
+        }
+        if (!newPassword.equals(confirmNewPassword)) {
+            throw new DifferentPasswordException();
+        }
+
+//
+//        user = userRepository.findOneByUuid(email);
+
+        user.setNewPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+        sendEmailResetPassword(user.getEmail(), user.getUuid());
+
+    }
+
+    @Override
+    public void changePasswordsWhenReset(String token) {
+        User user = userRepository.findOneByUuid(token);
+
+        user.setPassword(user.getNewPassword());
+        user.setNewPassword(null);
+
+        userRepository.save(user);
+    }
+
 
     private void sendEmailConfirmRegistration(String to, String token) {
         String content = "http://localhost:8099//api/users/confirmRegistration?token=" + token;
         String subject = "Confirm registration";
 
-        emailSender.sendEmail(to,subject,content);
+        emailSender.sendEmail(to, subject, content);
     }
 
-    @Scheduled(cron ="* * 17-21 * * *")
-    private void deleteUnconfirmedUsers(){
-        Date dayAgo=new Date(new Date().getTime()- TimeUnit.DAYS.toMillis(1));
-        List<User> users=userRepository.findAllByEnabledAndCreatedAtBefore(false,dayAgo);
+    @Scheduled(cron = "* * 17-21 * * *")
+    private void deleteUnconfirmedUsers() {
+        Date dayAgo = new Date(new Date().getTime() - TimeUnit.DAYS.toMillis(1));
+        List<User> users = userRepository.findAllByEnabledAndCreatedAtBefore(false, dayAgo);
         userRepository.delete(users);
     }
+
     @Override
-    public void validationOfPasswordIdenitiy(String password, String confiremPassword){
-        if (!password.equals(confiremPassword)){
-        throw  new NotIdenticalPasswordException();
+    public void validationOfPasswordIdenitiy(String password, String confiremPassword) {
+        if (!password.equals(confiremPassword)) {
+            throw new NotIdenticalPasswordException();
         }
     }
+
     private void sendEmailForgotPassword(String to, String token) {
         String content = "http://localhost:8099//api/users/resetPassword?token=" + token;
         String subject = "Confirm change password";
+        emailSender.sendEmail(to, subject, content);
+    }
+
+    public void sendEmailResetPassword(String to, String token) {
+        String content = "http://localhost:8099//api/users/resetPassword?token=" + token;
+        String subject = "Reset password";
         emailSender.sendEmail(to, subject, content);
     }
 }
