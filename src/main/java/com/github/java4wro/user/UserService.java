@@ -19,6 +19,11 @@ public interface UserService {
 
     void changePasswordsWhenForgot (String token);
 
+    void sendEmailWhenResetPassword(String email, String newPassword, String confirmNewPassword);
+
+    void changePasswordsWhenReset (String token);
+
+    void sendEmailResetPassword(String to, String token);
 
     void validationOfPasswordIdenitiy(String password, String confiremPassword);
 }
