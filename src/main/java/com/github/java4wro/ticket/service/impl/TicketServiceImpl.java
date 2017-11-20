@@ -20,6 +20,10 @@ public class TicketServiceImpl implements TicketService {
     private TicketMapper ticketMapper;
 
 
+    @Override
+    public TicketDTO addTicket(TicketDTO ticketDTO) {
+        return null;
+    }
 
     @Override
     public TicketDTO getTicketByUuid(String ticketUuid) {

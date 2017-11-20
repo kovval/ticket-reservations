@@ -13,6 +13,13 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
+    @PostMapping("/add")
+    private TicketDTO add (@RequestBody TicketDTO ticketDTO){
+
+        return ticketService.addTicket(ticketDTO);
+    }
+
+
     @GetMapping("/{uuid}")
     public TicketDTO findAllTicket(@PathVariable("uuid") String ticketUuid) {
         return ticketService.getTicketByUuid(ticketUuid);
