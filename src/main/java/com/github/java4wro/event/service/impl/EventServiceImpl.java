@@ -51,7 +51,6 @@ public class EventServiceImpl implements EventService {
     public EventDTO getEventByUuid(String eventUuid) {
         Event event = eventRepository.getEventByUuid(eventUuid);
         return eventMapper.toEventDTO(event);
-
     }
 
     @Override
