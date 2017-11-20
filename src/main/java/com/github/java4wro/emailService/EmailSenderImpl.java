@@ -35,7 +35,7 @@ public class EmailSenderImpl implements EmailSender {
 
     @Override
     public void sendEmail(String to, String subject, String content, String path) {
-        MimeMessage  mail = javaMailSender.createMimeMessage();
+        MimeMessage mail = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mail, true);
             helper.setReplyTo("ticket.java@gmail.com");
@@ -47,10 +47,7 @@ public class EmailSenderImpl implements EmailSender {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-
-
         javaMailSender.send(mail);
-
     }
 
 }
