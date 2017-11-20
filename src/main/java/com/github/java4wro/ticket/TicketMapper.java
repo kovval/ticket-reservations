@@ -13,6 +13,7 @@ public interface TicketMapper {
 //            @Mapping(source = "price", target = "ticketPrice")
 //    })
     TicketDTO toTicketDTO (Ticket ticket);
+
     List<TicketDTO> toTicketListDTO (List<Ticket> tickets);
 
 }
