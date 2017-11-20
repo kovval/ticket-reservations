@@ -50,8 +50,9 @@ public class UserController {
         userService.sendEmailWhenResetPassword(email, newPassword, confirmNewPassword);
     }
     @GetMapping(value = "/resetPassword")
-    void changePasswordsWhenReset(@RequestParam("token") String token){
+    public ModelAndView changePasswordsWhenReset(@RequestParam("token") String token){
         userService.changePasswordsWhenReset(token);
+        return new ModelAndView("redirect:/forgotPasswordChangeSuccessful.html");
     }
 
 }
