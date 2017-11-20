@@ -1,5 +1,6 @@
 package com.github.java4wro.event;
 
+import com.github.java4wro.event.exception.EventNotFoundException;
 import com.github.java4wro.event.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,14 +34,14 @@ public class EventController {
     }
 
     @DeleteMapping("/deleteByUuid")
-    public ResponseEntity<EventDTO> deleteEventByUUid(@RequestParam("uuid") String eventUuid) {
+    public void deleteEventByUUid(@RequestParam("uuid") String eventUuid) {
         EventDTO delateEvent = eventService.getEventByUuid(eventUuid);
         if (delateEvent == null) {
-            return ResponseEntity.notFound().build();
+            throw new EventNotFoundException(eventUuid);
         }
         eventService.deleteEventByUuid(eventUuid);
-        return ResponseEntity.ok().build();
     }
+
 
     //Input data format: 2007-12-03T10:15:30Z
     @GetMapping("/findByDate/{date1}/{date2}")
