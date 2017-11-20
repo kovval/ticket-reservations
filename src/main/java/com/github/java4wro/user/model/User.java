@@ -1,6 +1,7 @@
 package com.github.java4wro.user.model;
 
 
+import com.github.java4wro.commons.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +24,10 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
+    @Column
+    private String new_password;
+
+    @Enumerated(EnumType.ORDINAL)
     private UserRole role;
 
     private boolean enabled;

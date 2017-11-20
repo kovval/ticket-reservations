@@ -7,12 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import javax.websocket.server.PathParam;
-import java.util.List;
-
 /**
  * Created by RENT on 2017-11-13.
  */
@@ -24,7 +18,7 @@ public class EventController {
     private EventService eventService;
 
     @PostMapping(value = "/add")
-    private EventDTO add(EventDTO eventDTO) {
+    private EventDTO add(@RequestBody EventDTO eventDTO) {
         return eventService.addEvent(eventDTO);
     }
 
@@ -48,16 +42,11 @@ public class EventController {
         return ResponseEntity.ok().build();
     }
 
+    //Input data format: 2007-12-03T10:15:30Z
     @GetMapping("/findByDate/{date1}/{date2}")
     public List<EventDTO> findAllByDateTimeBetween(@PathVariable(value = "date1", required = false) String date1,
                                                    @PathVariable(value = "date2", required = false) String date2) {
         return eventService.findAllByDateTimeBetween(date1, date2);
-    public List<EventDTO> findAllEventsByTitle(@RequestParam("title") String eventTitle) {
-        return eventService.getEventsByTitle(eventTitle);
     }
 
-    @PostMapping("/sortByDate")
-    public List<Event> findByDateTimeEquals(@RequestBody String dateAndTime) {
-        return eventService.findByDateTimeEquals(dateAndTime);
-    }
 }

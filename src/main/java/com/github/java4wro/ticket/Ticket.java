@@ -2,7 +2,9 @@ package com.github.java4wro.ticket;
 
 
 import com.github.java4wro.commons.BaseEntity;
+import com.github.java4wro.csvparser.model.Seat;
 import com.github.java4wro.event.Event;
+import com.github.java4wro.user.model.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,39 +15,20 @@ import java.math.BigDecimal;
 @Setter
 @Entity
 public class Ticket extends BaseEntity{
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private String seat;
 
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Event event;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Seat seat;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getSeat() {
-        return seat;
-    }
-
-    public void setSeat(String seat) {
-        this.seat = seat;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
 }
