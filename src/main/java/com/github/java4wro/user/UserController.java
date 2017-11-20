@@ -5,6 +5,7 @@ import com.github.java4wro.user.dto.RegisterUserDTO;
 import com.github.java4wro.user.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping
     List<UserDTO> getAll(){
@@ -26,16 +27,17 @@ public class UserController {
     }
 
     @GetMapping(value = "/confirmRegistration")
-    void confirmRegistration(@RequestParam("token") String token) {
+    public ModelAndView confirmRegistration(@RequestParam("token") String token) {
         userService.confirmRegistration(token);
+        return new ModelAndView ("redirect:/login.html");
     }
 
     @PostMapping(value = "/forgotPassword")
-    void sendEmailWhenForgotPassword (@RequestParam("email") String email, @RequestParam ("newPassword") String newPassword, @RequestParam ("confirmNewPassword") String confirmNewPassword) {
+    public void sendEmailWhenForgotPassword (@RequestParam("email") String email, @RequestParam ("newPassword") String newPassword, @RequestParam ("confirmNewPassword") String confirmNewPassword) {
         userService.sendEmailWhenForgotPassword(email, newPassword, confirmNewPassword);
     }
     @GetMapping(value = "/forgotPassword")
-    void changePasswordsWhenForgot(@RequestParam("token") String token){
+    public void changePasswordsWhenForgot(@RequestParam("token") String token){
         userService.changePasswordsWhenForgot(token);
     }
 
