@@ -3,50 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Event</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 </head>
 <body>
-<form action="/api/event/add.html" method="post">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <input class="form-control" type="text" placeholder="nazwa" name="eventName">
-                <input class="form-control" type="text" placeholder="opis" name="eventDescription">
-                <input class="form-control" type="text" placeholder="cena" name="eventPrice">
-                <form method="post">
-                    <!-- Date input -->
-                    <div class="form-group">
-                        <label class="control-label" for="date">Data i Czas</label>
-                        <input class="form-control" id="date" placeholder="YYY-mm-ddThh:mm:ss" type="text"
-                               name="DateAndTime"/>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="submit-btn">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <!-- Submit button -->
-                        <div class="form-group">
-                            <button class="btn btn-primary " name="submit" type="submit">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<form action="/api/event/add" method="post">
+    <div class="form-group">
+        <input type="text" placeholder="nazwa" name="eventName">
+        <input type="text" placeholder="opis" name="eventDescription">
+        <input type="number" placeholder="cena" name="eventPrice">
+        <input type="datetime-local" placeholder="YYY-mm-ddThh:mm:ss" name="DateAndTime">
+        <button name="submit" type="submit">Submit</button>
+    </div>
 </form>
 </body>
-<!-- jQuery first, then Tether, then Bootstrap JS. -->
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
-        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
-        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
-        crossorigin="anonymous"></script>
-<div class="container">
 </html>

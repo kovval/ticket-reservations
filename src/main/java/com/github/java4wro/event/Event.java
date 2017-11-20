@@ -12,10 +12,6 @@ import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-/**
- * Created by RENT on 2017-11-10.
- */
-
 @Getter
 @Setter
 @ToString

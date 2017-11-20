@@ -14,8 +14,6 @@ public class EventDTO {
     private String eventName;
     private String eventDescription;
     private String dateAndTime;
-//    private LocalDateTime eventDateTime;
-
 
     public String getDateAndTime() {
         return dateAndTime;
@@ -24,7 +22,6 @@ public class EventDTO {
     public void setDateAndTime(String dateAndTime) {
         this.dateAndTime = dateAndTime;
     }
-
 
     public void setEventPrice(BigDecimal eventPrice) {
         this.eventPrice = eventPrice;
@@ -49,14 +46,6 @@ public class EventDTO {
     public BigDecimal getEventPrice() {
         return eventPrice;
     }
-    //    }
-    //        this.eventDateTime = eventDateTime;
-    //    public EventDTO(LocalDateTime eventDateTime) {
-    //        return eventDateTime;
-    //    }
-    //
-//    public LocalDateTime getEventDateTime() {
-//    public void setEventDateTime(LocalDateTime eventDateTime) {
-//        this.eventDateTime = eventDateTime;
-//    }
+
+
 }
