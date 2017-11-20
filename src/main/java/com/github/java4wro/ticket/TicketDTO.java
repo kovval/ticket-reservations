@@ -7,12 +7,14 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class TicketDTO {
+public class TicketDTO{
 
+    private String hallSeat;
 
+    private BigDecimal price;
 
-    private String ticketSeat;
+    private String eventUuid;
 
-    private BigDecimal ticketPrice;
+    private String userEmail;
 
 }
