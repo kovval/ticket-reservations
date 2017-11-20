@@ -166,7 +166,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private void sendEmailForgotPassword(String to, String token) {
-        String content = "http://localhost:8099//api/users/resetPassword?token=" + token;
+        String content = "http://localhost:8099//api/users/resetForgotPassword?token=" + token;
         String subject = "Confirm change password";
         emailSender.sendEmail(to, subject, content);
     }

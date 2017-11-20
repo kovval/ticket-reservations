@@ -33,12 +33,14 @@ public class UserController {
         return new ModelAndView ("redirect:/login.html");
     }
 
-    @PostMapping(value = "/forgotPassword")
-    public void sendEmailWhenForgotPassword (@RequestParam("email") String email, @RequestParam ("newPassword") String newPassword, @RequestParam ("confirmNewPassword") String confirmNewPassword) {
+    @PostMapping(value = "/resetForgotPassword")
+    public void sendEmailWhenForgotPassword (@RequestParam("email") String email,
+                                             @RequestParam ("newPassword") String newPassword,
+                                             @RequestParam ("confirmNewPassword") String confirmNewPassword) {
         userService.sendEmailWhenForgotPassword(email, newPassword, confirmNewPassword);
     }
-    @GetMapping(value = "/forgotPassword")
-    public void changePasswordsWhenForgot(@RequestParam("token") String token){
+    @GetMapping(value = "/resetForgotPassword")
+    public ModelAndView changePasswordsWhenForgot(@RequestParam("token") String token){
         userService.changePasswordsWhenForgot(token);
         return new ModelAndView("redirect:/forgotPasswordChangeSuccessful.html");
     }
