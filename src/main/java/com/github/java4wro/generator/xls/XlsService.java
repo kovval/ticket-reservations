@@ -47,11 +47,11 @@ public class XlsService {
         int currentrow = r;
         for (TicketDTO t :ticketDTOs) {
             final HSSFRow row = sheet.createRow(currentrow);
-            rows.add(row);
             row.createCell(1).setCellValue(eventDTO.getEventName());
             row.createCell(2).setCellValue(eventDTO.getEventDateAndTime().toString());
             row.createCell(3).setCellValue(t.getTicketId());
             row.createCell(4).setCellValue(t.getPrice().toString());
+            rows.add(row);
             currentrow++;
         }
         return rows;
