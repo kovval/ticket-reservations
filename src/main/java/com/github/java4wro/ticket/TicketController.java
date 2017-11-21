@@ -2,10 +2,9 @@ package com.github.java4wro.ticket;
 
 import com.github.java4wro.ticket.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -21,6 +20,22 @@ public class TicketController {
 
         return ticketService.addTicket(addTicketDTO);
     }
+
+    @GetMapping("/{uuid}")
+    public TicketDTO findAllTicket(@PathVariable("uuid") String ticketUuid) {
+        return ticketService.getTicketByUuid(ticketUuid);
+    }
+
+    @GetMapping("/findByEvent")
+    public List<TicketDTO> findAllTicketByEvent (@RequestParam ("Event") String eventName){
+        return ticketService.findAllTicketByEvent(eventName);
+    }
+
+    @GetMapping("/findAll")
+    public List<TicketDTO> findAll() {
+        return ticketService.findAll();
+    }
+
 
 }
 

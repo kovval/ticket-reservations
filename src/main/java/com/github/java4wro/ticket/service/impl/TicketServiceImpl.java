@@ -10,23 +10,26 @@ import com.github.java4wro.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-@Service
 public class TicketServiceImpl implements TicketService {
 
+    private final TicketRepository ticketRepository;
+    private final TicketMapper ticketMapper;
+    private final EventRepository eventRepository;
+    private final HallRepository hallRepository;
+    private final UserRepository userRepository;
+
     @Autowired
-    private TicketRepository ticketRepository;
-    @Autowired
-    private TicketMapper ticketMapper;
-    @Autowired
-    private EventRepository eventRepository;
-    @Autowired
-    private HallRepository hallRepository;
-    @Autowired
-    private UserRepository userRepository;
+    public TicketServiceImpl(TicketRepository ticketRepository, TicketMapper ticketMapper, EventRepository eventRepository, HallRepository hallRepository, UserRepository userRepository) {
+        this.ticketRepository = ticketRepository;
+        this.ticketMapper = ticketMapper;
+        this.eventRepository = eventRepository;
+        this.hallRepository = hallRepository;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public TicketDTO addTicket (AddTicketDTO addTicketDTO ){
@@ -48,4 +51,23 @@ public class TicketServiceImpl implements TicketService {
         ticket = ticketRepository.save(ticket);
         return ticketMapper.toTicketDTO(ticket);
     }
+
+    @Override
+    public TicketDTO getTicketByUuid(String ticketUuid) {
+        Ticket ticket = ticketRepository.getTicketByUuid(ticketUuid);
+
+        return ticketMapper.toTicketDTO(ticket);
+    }
+
+    @Override
+    public List<TicketDTO> findAllTicketByEvent(String eventName) {
+        List<Ticket> listTicket = ticketRepository.findAllTicketByEvent(eventName);
+        return ticketMapper.toTicketListDTO(listTicket);
+    }
+
+    @Override
+    public List<TicketDTO> findAll(){
+        return ticketMapper.toTicketListDTO(ticketRepository.findAll());
+    }
+
 }
