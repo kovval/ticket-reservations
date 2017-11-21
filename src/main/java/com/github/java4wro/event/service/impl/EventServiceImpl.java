@@ -24,32 +24,25 @@ public class EventServiceImpl implements EventService {
     public EventDTO addEvent(EventDTO eventDTO) {
 
         Event event = eventMapper.toEvent(eventDTO);
-//        event.setBasicPrice(eventDTO.getEventPrice());
-//        event.setDateTime(eventDTO.getEventDateTime());
-//        event.setTitle(eventDTO.getEventName());
         event = eventRepository.save(event);
+
         return eventMapper.toEventDTO(event);
     }
 
     @Override
     public List<EventDTO> findAllByDateTimeBetween(String date1, String date2) {
-        EventDTO event1 = new EventDTO();
-        EventDTO event2 = new EventDTO();
-
-        event1.setDateAndTime(date1);
-        event2.setDateAndTime(date2);
         Instant instant1 = Instant.parse(date1);
         Instant instant2 = Instant.parse(date2);
         LocalDateTime localDateTime1 = LocalDateTime.ofInstant(instant1, ZoneId.of(ZoneOffset.UTC.getId()));
         LocalDateTime localDateTime2 = LocalDateTime.ofInstant(instant2, ZoneId.of(ZoneOffset.UTC.getId()));
 
-        List<Event> eventByDate = eventRepository.findAllByDateTimeBetween(localDateTime1, localDateTime2);
-        return eventMapper.toEventsDTO(eventByDate);
+        List<Event> eventsByDate = eventRepository.findAllByDateTimeBetween(localDateTime1, localDateTime2);
+        return eventMapper.toEventsDTO(eventsByDate);
     }
 
     @Override
     public EventDTO getEventByUuid(String eventUuid) {
-        Event event = eventRepository.getEventByUuid(eventUuid);
+        Event event = eventRepository.findOneByUuid(eventUuid);
         return eventMapper.toEventDTO(event);
     }
 
@@ -61,7 +54,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void deleteEventByUuid(String eventUuid) {
-        Event event =eventRepository.getEventByUuid(eventUuid);
+        Event event = eventRepository.findOneByUuid(eventUuid);
         eventRepository.delete(event);
     }
 }

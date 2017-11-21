@@ -1,5 +1,7 @@
-package com.github.java4wro.event.exception;
+package com.github.java4wro.commons;
 
+import com.github.java4wro.event.EventNotFoundException;
+import com.github.java4wro.ticket.TicketNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,6 +20,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleEventNotFoundException(EventNotFoundException e){
         return new ResponseEntity<>
                 (String.format("Event with uuid: %s doesn't exist",e.getEventUuid()),
+                        HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(TicketNotFoundException.class)
+    @ResponseBody
+    public ResponseEntity<String> handleTicketNotFoundException(TicketNotFoundException e){
+        return new ResponseEntity<>
+                (String.format("Event with uuid: %s doesn't exist",e.getTicketUuid()),
                         HttpStatus.BAD_REQUEST);
     }
 }

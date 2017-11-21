@@ -18,20 +18,6 @@ public class TicketController {
         return ticketService.addTicket(ticketDTO);
     }
 
-//    @GetMapping("/{uuid}")
-//public TicketDTO findAllTicket(@PathVariable("uuid") String ticketUuid) {
-//    return ticketService.getTicketByUuid(ticketUuid);
-//}
-//
-//    @GetMapping("/findByEvent")
-//    public List<TicketDTO> findAllTicketByEvent (@RequestParam ("Event") String eventName){
-//        return (List<TicketDTO>) ticketService.getAllTicketByEvent(eventName);
-//    }
-//
-//    @GetMapping("/findAll")
-//    public List<TicketDTO> findAllByIdIsNotNull() {
-//        return ticketService.findAllByIdIsNotNull();
-//    }
 }
 
 

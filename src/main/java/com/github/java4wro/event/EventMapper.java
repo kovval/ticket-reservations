@@ -17,10 +17,7 @@ public interface EventMapper {
             @Mapping(source = "dateTime", target = "dateAndTime")
     })
     EventDTO toEventDTO(Event event);
-
     List<EventDTO> toEventsDTO(List<Event> events);
-
-    EventDTO toEventDTO(String eventUuid);
 
     @Mappings({
             @Mapping(source = "dateAndTime", target = "dateTime"),

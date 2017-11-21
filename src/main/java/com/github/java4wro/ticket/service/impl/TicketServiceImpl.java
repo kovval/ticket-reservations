@@ -1,8 +1,6 @@
 package com.github.java4wro.ticket.service.impl;
 
-import com.github.java4wro.csvparser.model.Seat;
 import com.github.java4wro.csvparser.repository.HallRepository;
-import com.github.java4wro.event.Event;
 import com.github.java4wro.event.EventMapper;
 import com.github.java4wro.event.EventRepository;
 import com.github.java4wro.ticket.Ticket;
@@ -10,11 +8,11 @@ import com.github.java4wro.ticket.TicketDTO;
 import com.github.java4wro.ticket.TicketMapper;
 import com.github.java4wro.ticket.TicketRepository;
 import com.github.java4wro.ticket.service.TicketService;
-import com.github.java4wro.user.dto.UserDTO;
+import com.github.java4wro.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 @Service
 public class TicketServiceImpl implements TicketService {
@@ -29,33 +27,18 @@ public class TicketServiceImpl implements TicketService {
     private EventMapper eventMapper;
     @Autowired
     private HallRepository hallRepository;
-
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
-    public TicketDTO addTicket (String eventUuid, String seat, Integer price, String email ){
-        Ticket ticket = ticketMapper.toTicket();
-        ticket = ticketRepository.save(ticket);
+    public TicketDTO addTicket (TicketDTO ticketDTO ){
+        Ticket ticket = Ticket.builder()
+                .event(eventRepository.findOneByUuid(ticketDTO.getEventUuid()))
+                .price(ticketDTO.getPrice())
+                .user(userRepository.findOneByEmail(ticketDTO.getUserEmail()))
+                .build();
 
-        String  eventUuid = new String();
-        eventRepository.getEventByUuid(eventUuid);
+        ticket = ticketRepository.save(ticket);
         return ticketMapper.toTicketDTO(ticket);
     }
-
-//    @Override
-//    public TicketDTO getTicketByUuid(String ticketUuid) {
-//        Ticket ticket = ticketRepository.getTicketByUuid(ticketUuid);
-//
-//        return ticketMapper.toTicketDTO(ticket);
-//    }
-//
-//    @Override
-//    public TicketDTO getAllTicketByEvent(String eventName) {
-//        List<Ticket> listTicket = ticketRepository.findAllTicketByEvent(eventName);
-//        return  ticketMapper.toTicketDTO((Ticket) listTicket);
-//    }
-//
-//    @Override
-//    public List<TicketDTO> findAllByIdIsNotNull() {
-//        return null;
-//    }
 }

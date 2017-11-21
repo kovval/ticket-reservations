@@ -1,4 +1,4 @@
-package com.github.java4wro.ticket.exceptions;
+package com.github.java4wro.ticket;
 
 /**
  * Created by RENT on 2017-11-20.
@@ -12,9 +12,6 @@ public class TicketNotFoundException extends RuntimeException {
         return ticketUuid;
     }
 
-    public void setTicketUuid(String ticketUuid) {
-        this.ticketUuid = ticketUuid;
-    }
 
 
 }

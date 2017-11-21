@@ -13,7 +13,7 @@ import java.util.List;
 public interface TicketMapper {
 
     @Mappings({
-            @Mapping(source = "seat.seat", target = "hallSeat"),
+            @Mapping(source = "seat.seat", target = "seat"),
             @Mapping(source = "event.uuid", target = "eventUuid"),
             @Mapping(source = "user.email", target = "userEmail")
     })

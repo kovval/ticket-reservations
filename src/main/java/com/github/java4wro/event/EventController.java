@@ -1,9 +1,7 @@
 package com.github.java4wro.event;
 
-import com.github.java4wro.event.exception.EventNotFoundException;
 import com.github.java4wro.event.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

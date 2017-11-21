@@ -10,10 +10,7 @@ import java.math.BigDecimal;
 public class EventDTO {
 
     private BigDecimal eventPrice;
-
     private String eventName;
-
     private String eventDescription;
-
     private String dateAndTime;
 }

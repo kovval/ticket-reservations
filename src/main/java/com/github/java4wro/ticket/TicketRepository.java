@@ -6,10 +6,6 @@ import java.util.List;
 
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
-    List<Ticket> findAllTicketByEvent (String ticket);
-
     Ticket getTicketByUuid(String ticketUuid);
-
-    List<Ticket> findAllByIdIsNotNull();
 
 }

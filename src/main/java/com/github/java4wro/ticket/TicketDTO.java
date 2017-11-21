@@ -9,12 +9,9 @@ import java.math.BigDecimal;
 @Setter
 public class TicketDTO{
 
-    private String hallSeat;
-
+    private String seat;
     private BigDecimal price;
-
     private String eventUuid;
-
     private String userEmail;
 
 }

@@ -6,9 +6,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
+
     List<Event> findByTitle(String title);
-
-    Event getEventByUuid(String eventUuid);
-
-    List<Event> findAllByDateTimeBetween(LocalDateTime date1, LocalDateTime date2);
+    Event findOneByUuid(String eventUuid);
+    List<Event> findAllByDateTimeBetween(LocalDateTime start, LocalDateTime end);
 }
