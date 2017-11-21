@@ -11,13 +11,17 @@ import java.util.UUID;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class BaseEntity implements Serializable {
+public abstract class BaseEntity {
 
     @Column(unique = true)
     private String uuid = UUID.randomUUID().toString();
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at", nullable = false)
     private Date createdAt;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "last_update")
     private Date lastUpdate;
 
     @PrePersist
