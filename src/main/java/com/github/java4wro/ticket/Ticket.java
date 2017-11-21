@@ -5,13 +5,13 @@ import com.github.java4wro.commons.BaseEntity;
 import com.github.java4wro.csvparser.model.Seat;
 import com.github.java4wro.event.Event;
 import com.github.java4wro.user.model.User;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity

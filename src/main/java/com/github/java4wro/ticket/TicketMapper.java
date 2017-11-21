@@ -21,7 +21,7 @@ public interface TicketMapper {
     List<TicketDTO> toTicketListDTO(List<Ticket> tickets);
 
     @Mappings({
-            @Mapping(source = "hallSeat", target = "seat.seat"),
+            @Mapping(source = "seat", target = "seat.seat"),
             @Mapping(source = "eventUuid", target = "event.uuid"),
             @Mapping(source = "userEmail", target = "user.email")
     })
