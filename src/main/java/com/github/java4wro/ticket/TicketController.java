@@ -14,10 +14,19 @@ public class TicketController {
     private TicketService ticketService;
 
     @PostMapping("/add")
-    private TicketDTO add (@RequestBody TicketDTO ticketDTO){
+    private TicketDTO add(@RequestBody TicketDTO ticketDTO) {
         return ticketService.addTicket(ticketDTO);
     }
 
+
+    @DeleteMapping("/deleteByUuid")
+    public void deleteTicketByUUid(@RequestParam("uuid") String ticketUuid) {
+       TicketDTO deleteTicket =  ticketService.getTicketByUuid(ticketUuid);
+        if(deleteTicket==null){
+            throw new TicketNotFoundException(ticketUuid);
+        }
+        ticketService.deleteTicketByUuid(ticketUuid);
+    }
 }
 
 

@@ -31,7 +31,7 @@ public class TicketServiceImpl implements TicketService {
     private UserRepository userRepository;
 
     @Override
-    public TicketDTO addTicket (TicketDTO ticketDTO ){
+    public TicketDTO addTicket(TicketDTO ticketDTO) {
         Ticket ticket = Ticket.builder()
                 .event(eventRepository.findOneByUuid(ticketDTO.getEventUuid()))
                 .price(ticketDTO.getPrice())
@@ -39,6 +39,19 @@ public class TicketServiceImpl implements TicketService {
                 .build();
 
         ticket = ticketRepository.save(ticket);
+        return ticketMapper.toTicketDTO(ticket);
+    }
+
+
+    @Override
+    public void deleteTicketByUuid(String ticketUuid) {
+        Ticket ticket = ticketRepository.getTicketByUuid(ticketUuid);
+        ticketRepository.delete(ticket);
+    }
+
+    @Override
+    public TicketDTO getTicketByUuid(String ticketUuid) {
+        Ticket ticket = ticketRepository.getTicketByUuid(ticketUuid);
         return ticketMapper.toTicketDTO(ticket);
     }
 }

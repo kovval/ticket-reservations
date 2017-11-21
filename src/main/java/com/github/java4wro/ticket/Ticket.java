@@ -32,6 +32,7 @@ public class Ticket extends BaseEntity{
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "hall_id")
     private Seat seat;
 
 }
