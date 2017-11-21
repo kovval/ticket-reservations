@@ -1,14 +1,60 @@
 databaseChangeLog:
   - changeSet:
       id: 1
-      author: xenteros
+      author: liquidBase
       changes:
+        - createTable:
+            tableName: event
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: basic_price
+                  type: decimal
+                  constraints:
+                    nullable: false
+              - column:
+                 name: date_time
+                 type: datetime
+                 constraints:
+                   nullable: false
+              - column:
+                 name: created_at
+                 type: datetime
+                 constraints:
+                   nullable: false
+              - column:
+                 name: last_update
+                 type: datetime
+                 constraints:
+                   nullable: true
+              - column:
+                 name: uuid
+                 type: varchar(255)
+                 constraints:
+                   nullable: false
+                   unique: true
         - createTable:
             tableName: hall
             columns:
               - column:
                   name: id
-                  type: int
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
@@ -23,3 +69,123 @@ databaseChangeLog:
                   type: decimal(9,2)
                   constraints:
                     nullable: false
+              - column:
+                  name: created_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_update
+                  type: datetime
+                  constraints:
+                    nullable: true
+              - column:
+                  name: uuid
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: new_password
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                 name: enabled
+                 type: boolean
+                 constraints:
+                   nullable: false
+              - column:
+                 name: role
+                 type: int
+                 constraints:
+                   nullable: false
+              - column:
+                  name: created_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_update
+                  type: datetime
+                  constraints:
+                    nullable: true
+              - column:
+                  name: uuid
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+        - createTable:
+            tableName: ticket
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: price
+                  type: decimal
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_update
+                  type: datetime
+                  constraints:
+                    nullable: true
+              - column:
+                  name: uuid
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: event_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: event_id
+                    references: event(id)
+              - column:
+                  name: hall_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: hall_id
+                    references: hall(id)
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: user_id
+                    references: user(id)
