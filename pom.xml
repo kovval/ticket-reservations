@@ -8,10 +8,6 @@
     <artifactId>ticket-reservations</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <properties>
-        <org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
-    </properties>
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -23,14 +19,6 @@
         <swagger.version>2.2.2</swagger.version>
         <lombok.version>1.16.16</lombok.version>
     </properties>
-
-
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>
@@ -105,15 +93,6 @@
             <artifactId>liquibase-core</artifactId>
             <version>3.5.3</version>
         </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.opencsv</groupId>
-            <artifactId>opencsv</artifactId>
-            <version>3.8</version>
-        </dependency>
         <!-- Dodawanie Dependency grupy 3-->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
@@ -172,4 +151,10 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 </project>
