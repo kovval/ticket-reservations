@@ -61,7 +61,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void deleteEventByUuid(String eventUuid) {
-        Event event =eventRepository.getEventByUuid(eventUuid);
+        Event event = eventRepository.getEventByUuid(eventUuid);
         eventRepository.delete(event);
     }
 }
