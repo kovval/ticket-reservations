@@ -1,22 +1,30 @@
 package com.github.java4wro.csvparser.model;
 
-import com.github.java4wro.commons.BaseEntity;
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "hall")
-public class Seat extends BaseEntity {
+public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
     private String seat;
-
     private Float value;
 
+    public String getSeat() {
+        return seat;
+    }
+
+    public void setSeat(String seat) {
+        this.seat = seat;
+    }
+
+    public Float getValue() {
+        return value;
+    }
+
+    public void setValue(Float value) {
+        this.value = value;
+    }
 }
