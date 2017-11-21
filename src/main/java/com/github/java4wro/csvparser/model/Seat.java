@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Seat extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    private Long id;
 
     private String seat;
 
