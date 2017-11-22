@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TicketConfiguration {
 
-
+    //Configuration Serivce class where we can first set then create our Service
     @Bean
     public TicketService ticketService(TicketRepository ticketRepository, TicketMapper ticketMapper, EventRepository eventRepository, HallRepository hallRepository, UserRepository userRepository) {
         return new TicketServiceImpl(ticketRepository, ticketMapper, eventRepository, hallRepository, userRepository);

@@ -22,6 +22,7 @@ public class TicketServiceImpl implements TicketService {
     private final HallRepository hallRepository;
     private final UserRepository userRepository;
 
+    //Autowiring via constructor - allows to avoid nesting in Autowired components
     @Autowired
     public TicketServiceImpl(TicketRepository ticketRepository, TicketMapper ticketMapper, EventRepository eventRepository, HallRepository hallRepository, UserRepository userRepository) {
         this.ticketRepository = ticketRepository;
@@ -38,17 +39,21 @@ public class TicketServiceImpl implements TicketService {
 
         Event event = eventRepository.findOneByUuid(addTicketDTO.getEventUuid());
         Seat seat = hallRepository.findOneBySeat(addTicketDTO.getSeat());
-        BigDecimal seatPrice = new BigDecimal(Float.toString(seat.getValue()));
-        BigDecimal price = event.getBasicPrice().multiply(seatPrice);
+        BigDecimal finalPrice = event.getBasicPrice().multiply(seat.getValue());
 
+        //Ticket object creation via builder() and stream approach
         Ticket ticket = Ticket.builder()
                 .event(eventRepository.findOneByUuid(addTicketDTO.getEventUuid()))
                 .user(userRepository.findOneByEmail(auth.getName()))
                 .seat(hallRepository.findOneBySeat(addTicketDTO.getSeat()))
-                .price(price)
+                .price(finalPrice)
                 .build();
 
+        //ToDo Zapytać Adama o unique na parze event_id i hall_id
         ticket = ticketRepository.save(ticket);
+
+        //ToDo wyołać Jankową metodę do wydruku biletów
+
         return ticketMapper.toTicketDTO(ticket);
     }
 
