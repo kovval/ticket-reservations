@@ -33,7 +33,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public TicketDTO addTicket (AddTicketDTO addTicketDTO ){
+    public TicketDTO addTicket (AddTicketDTO addTicketDTO) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -66,7 +66,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<TicketDTO> findAllTicketByEvent(String eventName) {
-        List<Ticket> listTicket = ticketRepository.findAllTicketByEvent(eventName);
+        List<Ticket> listTicket = ticketRepository.findAllTicketByEventTitle(eventName);
         return ticketMapper.toTicketListDTO(listTicket);
     }
 
