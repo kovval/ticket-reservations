@@ -33,4 +33,19 @@ public class GlobalHandlerException {
                         HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler (NotIdenticalPasswordException.class)
+    @ResponseBody
+    public ResponseEntity<String> handleNotIdenticalPasswordException (NotIdenticalPasswordException e) {
+        return new ResponseEntity<>
+                (String.format("Password and confirmed password are not identical"), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DifferentPasswordException.class)
+    @ResponseBody
+    public ResponseEntity<String> handleDifferentPasswordException (DifferentPasswordException e){
+        return new ResponseEntity<>
+                (String.format("The passwords are different!"),
+                        HttpStatus.BAD_REQUEST);
+    }
+
 }

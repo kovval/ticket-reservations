@@ -13,8 +13,7 @@ import javax.mail.internet.MimeMessage;
 public class EmailSenderImpl implements EmailSender {
 
     @Autowired
-    private  JavaMailSender javaMailSender;
-
+    private JavaMailSender javaMailSender;
 
     @Override
     public void sendEmail(String to, String subject, String content) {
@@ -39,18 +38,16 @@ public class EmailSenderImpl implements EmailSender {
         MimeMessage mail = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mail, true);
-            helper.setTo(to);
             helper.setReplyTo("ticket.java@gmail.com");
             helper.setFrom("ticket.java@gmail.com");
-            helper.setSubject(subject);
+            helper.setSubject("Ticket");
             helper.setText(content, true);
             FileSystemResource file = new FileSystemResource(path);
             helper.addAttachment(file.getFilename(), file);
-
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-
-        this.javaMailSender.send(mail);
+        javaMailSender.send(mail);
     }
+
 }

@@ -22,9 +22,10 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/api/users/getAll").hasRole("ADMIN")
-                .antMatchers("/api/users/**" , "/registration.html" , "/login.html").permitAll()
+                .antMatchers("/api/users/**", "/registration.html",
+                        "/login.html", "/logoutSuccess.html", "/forgotPassword.html",
+                        "/forgotPasswordChangeSuccessful.html").permitAll()
                 .anyRequest().authenticated();
-
 
 
         http.formLogin()
@@ -34,6 +35,13 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/hello.html")
                 .failureHandler((request, response, exception) -> response.sendError(HttpStatus.BAD_REQUEST.value(),
                         "Email or password invalid"));
+
+        http.logout()
+                .logoutUrl("/logout")
+                .invalidateHttpSession(true)
+                .logoutSuccessUrl("/logoutSuccess.html")
+                .permitAll();
+
     }
 
     @Bean
@@ -43,7 +51,7 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
