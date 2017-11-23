@@ -1,37 +1,35 @@
-package com.github.java4wro.user.model;
-
+package com.github.java4wro.commons;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
 @Getter
 @Setter
-
 @MappedSuperclass
 public abstract class BaseEntity {
 
+    @Column(unique = true)
     private String uuid = UUID.randomUUID().toString();
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at", nullable = false)
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "last_update")
     private Date lastUpdate;
 
     @PrePersist
     public void prePersist() {
         if (createdAt == null) {
-            createdAt =new Date();
+            createdAt = new Date();
         } else {
-            lastUpdate =new Date();
+            lastUpdate = new Date();
         }
     }
 

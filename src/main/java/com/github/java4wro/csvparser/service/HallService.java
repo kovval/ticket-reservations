@@ -8,5 +8,7 @@ import java.util.List;
 public interface HallService {
     List<Seat> findAllSeats();
     void readFile(InputStream is) throws IOException;
+    boolean exists(String seat);
+
 
 }

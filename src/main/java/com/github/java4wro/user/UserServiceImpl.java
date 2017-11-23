@@ -42,9 +42,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO addUser(UserDTO userDTO)  {
 
-        if (userRepository.existsByEmail(userDTO.getEmail())) {
-            throw new EmailExistException(userDTO.getEmail());
-        }
+//        if (userRepository.existsByEmail(userDTO.getEmail())) {
+//            throw new EmailExistException(userDTO.getEmail());
+//        }
 
         User user = new User();
 
