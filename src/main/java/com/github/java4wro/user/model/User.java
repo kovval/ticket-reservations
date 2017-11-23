@@ -1,11 +1,9 @@
 package com.github.java4wro.user.model;
 
 
-
+import com.github.java4wro.commons.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 @Entity
 @Getter
 @Setter
-
 public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,8 +27,9 @@ public class User extends BaseEntity {
     private String password;
 
     @Column
-    private String newPassword;
+    private String new_password;
 
+    @Enumerated(EnumType.ORDINAL)
     private UserRole role;
 
     private boolean enabled;

@@ -1,9 +1,6 @@
 package com.github.java4wro;
 
-
 import org.springframework.context.annotation.Configuration;
-
-
 
 import java.net.URI;
 import java.net.URISyntaxException;

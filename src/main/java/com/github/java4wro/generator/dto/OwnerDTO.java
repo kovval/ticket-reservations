@@ -10,5 +10,4 @@ public class OwnerDTO {
 
     private String name;
     private String email;
-
 }
