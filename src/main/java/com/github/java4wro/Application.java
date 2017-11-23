@@ -1,4 +1,5 @@
 package com.github.java4wro;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -21,7 +22,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 )
 public class Application {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 

@@ -8,7 +8,10 @@ import com.opencsv.CSVReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -37,7 +40,7 @@ public class HallServiceImpl implements HallService {
                         Character r = (char) (row + 64);
                         Seat newSeat = new Seat();
                         newSeat.setSeat(r.toString() + String.valueOf(i + 1));
-                        newSeat.setValue(Float.valueOf(line[i]));
+                        newSeat.setValue(new BigDecimal(line[i]));
                         hallRepository.save(newSeat);
                     }
                 }

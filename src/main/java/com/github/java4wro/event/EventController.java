@@ -34,8 +34,8 @@ public class EventController {
 
     @DeleteMapping("/deleteByUuid")
     public void deleteEventByUUid(@RequestParam("uuid") String eventUuid) {
-        EventDTO delateEvent = eventService.getEventByUuid(eventUuid);
-        if (delateEvent == null) {
+        EventDTO deleteEvent = eventService.getEventByUuid(eventUuid);
+        if (deleteEvent == null) {
             throw new EventNotFoundException(eventUuid);
         }
         eventService.deleteEventByUuid(eventUuid);

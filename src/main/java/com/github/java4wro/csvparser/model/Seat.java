@@ -1,30 +1,23 @@
 package com.github.java4wro.csvparser.model;
 
-import javax.persistence.*;
+import com.github.java4wro.commons.BaseEntity;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.math.BigDecimal;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "hall")
-public class Seat {
+public class Seat extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    private Long id;
 
     private String seat;
-    private Float value;
 
-    public String getSeat() {
-        return seat;
-    }
+    private BigDecimal value;
 
-    public void setSeat(String seat) {
-        this.seat = seat;
-    }
-
-    public Float getValue() {
-        return value;
-    }
-
-    public void setValue(Float value) {
-        this.value = value;
-    }
 }
