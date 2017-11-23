@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResponseEntity<String> handleEventNotFoundException(EventNotFoundException e){
         return new ResponseEntity<>
-                (String.format("Event with uuid: %s doesn't exist",e.getEventUuid()),
+                (String.format("Ticket with uuid: %s doesn't exist",e.getEventUuid()),
                         HttpStatus.BAD_REQUEST);
     }
 
