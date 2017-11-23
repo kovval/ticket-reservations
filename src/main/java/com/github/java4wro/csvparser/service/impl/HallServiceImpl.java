@@ -16,14 +16,13 @@ import java.util.List;
 
 @Service
 public class HallServiceImpl implements HallService {
-    @Autowired
-    private HallRepository hall_Repository;
 
-    public HallServiceImpl(){}
+    @Autowired
+    private HallRepository hallRepository;
 
     @Override
     public List<Seat> findAllSeats() {
-        return hall_Repository.findAll();
+        return hallRepository.findAll();
     }
 
     @Override
@@ -42,7 +41,7 @@ public class HallServiceImpl implements HallService {
                         Seat newSeat = new Seat();
                         newSeat.setSeat(r.toString() + String.valueOf(i + 1));
                         newSeat.setValue(new BigDecimal(line[i]));
-                        hall_Repository.save(newSeat);
+                        hallRepository.save(newSeat);
                     }
                 }
                 row++;
@@ -50,5 +49,10 @@ public class HallServiceImpl implements HallService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean exists(String seat) {
+        return hallRepository.existsBySeat(seat);
     }
 }

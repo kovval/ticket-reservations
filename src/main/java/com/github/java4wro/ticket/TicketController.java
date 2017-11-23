@@ -37,6 +37,14 @@ public class TicketController {
     }
 
 
+    @DeleteMapping("/deleteByUuid")
+    public void deleteTicketByUUid(@RequestParam("uuid") String ticketUuid) {
+       TicketDTO deleteTicket =  ticketService.getTicketByUuid(ticketUuid);
+        if(deleteTicket==null){
+            throw new TicketNotFoundException(ticketUuid);
+        }
+        ticketService.deleteTicketByUuid(ticketUuid);
+    }
 }
 
 

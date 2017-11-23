@@ -75,4 +75,10 @@ public class TicketServiceImpl implements TicketService {
         return ticketMapper.toTicketListDTO(ticketRepository.findAll());
     }
 
+    @Override
+    public void deleteTicketByUuid(String ticketUuid) {
+        Ticket ticket = ticketRepository.getTicketByUuid(ticketUuid);
+        ticketRepository.delete(ticket);
+    }
+
 }

@@ -15,4 +15,6 @@ public interface TicketService {
     List<TicketDTO> findAllTicketByEvent(String eventName);
 
     List<TicketDTO> findAll();
+
+    void deleteTicketByUuid(String ticketUuid);
 }
